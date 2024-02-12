@@ -1,0 +1,41 @@
+.login-page{
+    padding: 0;
+    margin: 0;
+    width: 100dvw;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: url("https://wallpapergod.com/images/hd/marauders-map-1280X905-wallpaper-bfysqiyu0x7liolg.jpeg") center;
+}
+.login-controller{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50dvw;
+    height: 100dvh;
+}
+.login-controller div{
+    display: flex;
+    flex-direction: column;
+    height: 35dvh;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(255, 255, 255, 0.752);
+    padding: 2rem;
+    border-radius: 1rem;
+}
+.login-inputs{
+    width: 20dvw;
+    padding: 2%;
+}
+.login-btn{
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border-radius: 1em;
+    width: 10dvw;
+    height: 5dvh;
+    cursor: pointer;
+}
