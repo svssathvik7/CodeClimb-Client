@@ -4,12 +4,14 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MapPage from './Pages/MapPage';
+import Home from './Pages/Home';
 function App() {
   return (
     <div>
       <Routes>
         <Route exact path="/login" Component={Login}/>
         <Route exact path='/map' Component={MapPage}/>
+        <Route exact path="/home" Component={Home}/>
       </Routes>
       <ToastContainer
         position="top-right"

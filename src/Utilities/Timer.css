@@ -1,0 +1,9 @@
+#timer{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: 1px solid black;
+    padding: 0.5rem;
+    width: fit-content;
+    height: fit-content;
+}

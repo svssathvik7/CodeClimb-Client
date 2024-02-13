@@ -1,0 +1,26 @@
+
+#Guide-Lines{
+    border: 1px solid black;
+    border-radius: 2rem;
+    width: 70dvw;
+    height: 50dvh;
+    padding: 0 2rem 2rem 2rem;
+    margin-top: 15%;
+    animation: scaleAnimation 0.7s ease;
+}
+#Guidelines-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+@keyframes scaleAnimation {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100%{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
