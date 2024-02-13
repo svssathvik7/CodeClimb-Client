@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./Login.css";
 import axios from 'axios';
-import { Bounce, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 export default function Login() {
     const [formData,setFormData] = useState({
         username : '',
