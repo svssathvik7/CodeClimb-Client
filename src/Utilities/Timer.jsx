@@ -5,8 +5,8 @@ const Timer = (props) => {
    const initialTime = Math.floor((EndTime - new Date()) / 1000);
    const [time, setTime] = useState(initialTime);
    if (time>3600) {
-                    setTime(3600);
-            }
+    setTime(3600);
+  }
   const [formattedTime, setFormattedTime] = useState('60:00');
 
   useEffect(() => {
