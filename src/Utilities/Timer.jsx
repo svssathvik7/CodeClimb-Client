@@ -10,14 +10,14 @@ const Timer = (props) => {
   const [formattedTime, setFormattedTime] = useState('60:00');
 
   useEffect(() => {
-    if (props.start && time > 0) {
+    if ( time > 0) {
       const timer = setInterval(() => {
         setTime(prevTime => prevTime - 1);
       }, 1000);
 
       return () => clearInterval(timer);
     }
-  }, [props.start, time]);
+  }, [ time]);
 
   useEffect(() => {
     const minutes = Math.floor(time / 60);

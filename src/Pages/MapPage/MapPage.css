@@ -8,3 +8,17 @@
     padding: 5em 0em;
     background-color: #D7A357;
 }
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+#game-guide-button{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 10px;
+    border-radius: 50%;
+    position: fixed;
+}

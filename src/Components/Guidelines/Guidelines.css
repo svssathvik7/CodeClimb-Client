@@ -1,12 +1,16 @@
 
 #Guide-Lines{
+    background-color: white;
+    position: absolute;
+    top: 25%;
+    left: 13%;
     border: 1px solid black;
-    border-radius: 2rem;
+    border-radius: 5px;
     width: 70dvw;
     height: 50dvh;
     padding: 0 2rem 2rem 2rem;
-    margin-top: 15%;
     animation: scaleAnimation 0.7s ease;
+    position: fixed;
 }
 #Guidelines-header{
     display: flex;
