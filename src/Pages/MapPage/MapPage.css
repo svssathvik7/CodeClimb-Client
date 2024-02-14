@@ -1,0 +1,10 @@
+.map-page-container {
+    width: 100dvw;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5em 0em;
+    background-color: #D7A357;
+}

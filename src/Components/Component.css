@@ -1,0 +1,112 @@
+.row-head {
+    display: flex;
+    flex-direction: row;
+}
+
+.row-head:nth-child(even) {
+    flex-direction: row-reverse !important;
+}
+
+.block-number {
+    z-index: 100;
+}
+
+.block-head {
+    width: 8dvw;
+    height: 8dvw;
+    background-color: #3F0D10;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1.5px solid white;
+    position: relative;
+    flex-direction: column;
+    font-size: 1.3dvw;
+}
+
+
+.block-head img {
+    position: absolute;
+    left: 50%;
+    z-index: 99;
+}
+
+.snake-id-26 {
+    width: 30dvw;
+    transform: translate(-91%, 117%) rotate(-42deg);
+    z-index: 98 !important;
+}
+
+.snake-id-17 {
+    width: 25dvw;
+    transform: scaleX(-1) rotate(-16deg) translate(0%, 75%);
+}
+
+.snake-id-55 {
+    transform: translate(-16%, 140%) rotate(43deg) scaleX(-1);
+}
+
+.snake-id-97 {
+    width: 39dvw;
+    transform: translate(-7%, 169%) rotate(32deg);
+    z-index: 94 !important;
+}
+
+.snake-id-75 {
+    height: 6em;
+    transform: translate(-25%, 400%) rotate(60deg);
+    width: 72dvw;
+    z-index: 93 !important;
+}
+
+.snake-id-99 {
+    z-index: 94 !important;
+    position: absolute;
+    height: 6em;
+    width: 88dvw;
+    transform: translate(-38%, 538%) rotate(76deg);
+}
+
+.snake-id-59 {
+    width: 70dvw;
+    height: 7dvw;
+    transform: translate(-15%, 324%) rotate(46deg);
+    z-index: 97 !important;
+}
+
+.snake-id-43,
+.snake-id-47 {
+    transform: translate(-87%, 137%) rotate(-40deg);
+}
+
+.block-id-16 {
+    width: 5dvw;
+    height: 20em;
+    transform: translate(200%, -17%) rotate(68deg);
+}
+
+.block-id-19,
+.block-id-30,
+.block-id-41,
+.block-id-52,
+.block-id-63,
+.block-id-74 {
+    width: 5dvw;
+    transform: translate(-50%, -50%);
+    height: 14em;
+}
+
+.block-id-65 {
+    width: 5dvw;
+    transform: translate(362%, -20%) rotate(66deg);
+    height: 33em;
+}
+
+.block-head .no-of-users-count {
+    opacity: .5;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    color: black;
+}
