@@ -46,6 +46,8 @@ export default function Login() {
                     theme: "dark",
                 });
                 navigate('/map');
+                const url = `/map?param1=${formData.username}`;
+                window.location.href = url;
             }
         } catch (error) {
             toast.error("Login failed!", {
