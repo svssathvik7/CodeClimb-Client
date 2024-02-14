@@ -1,6 +1,6 @@
 import s1 from '../Assets/Snake6.png';
 import s2 from '../Assets/Snake7.png';
-import s3 from '../Assets/Snake8.png';
+import s3 from '../Assets/Snake2.png';
 import s4 from '../Assets/Snake5.png';
 const snakes = {
     99: {
