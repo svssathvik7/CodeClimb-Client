@@ -9,6 +9,10 @@
 
 .block-number {
     z-index: 100;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .block-head {
@@ -30,6 +34,7 @@
     position: absolute;
     left: 50%;
     z-index: 99;
+    pointer-events: none;
 }
 
 .snake-id-26 {
@@ -54,18 +59,16 @@
 }
 
 .snake-id-75 {
-    height: 6em;
-    transform: translate(-25%, 400%) rotate(60deg);
-    width: 72dvw;
+    transform: translate(-18%, 51%) rotate(-62deg);
+    width: 45dvw;
     z-index: 93 !important;
 }
 
 .snake-id-99 {
     z-index: 94 !important;
     position: absolute;
-    height: 6em;
-    width: 88dvw;
-    transform: translate(-38%, 538%) rotate(76deg);
+    width: 52dvw;
+    transform: translate(-35%, 57%) rotate(-48deg);
 }
 
 .snake-id-59 {
@@ -109,4 +112,22 @@
     bottom: 5%;
     right: 5%;
     color: black;
+}
+
+.token-block {
+    position: relative;
+    width: inherit;
+    height: inherit;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.token-block img {
+    height: 90%;
+    object-fit: contain;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
 }
