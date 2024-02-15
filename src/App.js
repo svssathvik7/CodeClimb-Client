@@ -4,12 +4,13 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MapPage from './Pages/MapPage/MapPage';
+import DiceContext from './Contexts/DiceContext';
 function App() {
   return (
     <div>
       <Routes>
         <Route exact path="/" Component={Login} />
-        <Route exact path='/map' Component={MapPage} />
+        <Route exact path='/map' element={<DiceContext><MapPage /></DiceContext>} />
       </Routes>
       <ToastContainer
         position="top-right"

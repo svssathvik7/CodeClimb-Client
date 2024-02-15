@@ -1,13 +1,14 @@
 import React from 'react'
 import Block from './Block';
+import './RBP.css';
 
 const Row = (props) => {
-    const { rowId, pawn } = props;
+    const { rowId, pawn, updatePawn } = props;
     const rowConstants = [...Array(10).keys()];
     return (
         <div className='row-head'>
             {rowConstants.map((key, ind) => {
-                return <Block pawn={pawn} key={key} blockId={(rowId - 1) * 10 + ind + 1} />
+                return <Block updatePawn={updatePawn} pawn={pawn} key={key} blockId={(rowId - 1) * 10 + ind + 1} />
             })}
         </div>
     )
