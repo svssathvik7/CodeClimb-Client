@@ -1,14 +1,17 @@
 
 #Guide-Lines{
-    background-color: white;
     position: absolute;
-    top: 25%;
-    left: 13%;
-    border: 1px solid black;
-    border-radius: 5px;
+    top: 17%;
+    left: 9.5%;
+    border: 1px solid #3F0D10;
+    background-color: #b1a996;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
     width: 70dvw;
     height: 50dvh;
-    padding: 0 2rem 2rem 2rem;
+    padding: 2rem 4rem;
     animation: scaleAnimation 0.7s ease;
     position: fixed;
     z-index: 1500;
@@ -17,15 +20,21 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    color: #3F0D10;
 }
 @keyframes scaleAnimation {
     0% {
-        transform: scale(0);
+        top: 0;
         opacity: 0;
     }
     100%{
-        transform: scale(1);
+        top:17%;
         opacity: 1;
     }
+}
+#guidelines ul{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
