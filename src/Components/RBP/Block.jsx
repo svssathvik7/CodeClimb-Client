@@ -24,7 +24,7 @@ const Block = (props) => {
         setBlock((prev) => {
             return { ...prev, isPawn: false }
         });
-        const value = from === 'snake' ? block.isSnake.end : block.isLadder.end;
+        const value = from === 'snake' ? block.isSnake.end : block.isLadder.start + 1;
         updatePawn(value, 'ladder-or-snake');
     }
     useEffect(() => {
