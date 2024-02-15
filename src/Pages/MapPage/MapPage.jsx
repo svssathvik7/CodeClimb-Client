@@ -3,6 +3,8 @@ import Map from '../../Components/Map/Map'
 import "./MapPage.css";
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import Timer from '../../Utilities/Timer';
+import DiceObject from '../../Utilities/Dice';
 export default function MapPage() {
   const params = new URLSearchParams(window.location.search);
   const regNo = params.get('param1');
@@ -18,7 +20,7 @@ export default function MapPage() {
     if (data.status === true) {
       const details = data.userDetails;
       setPawn((prev) => {
-        return { ...prev, blockId: details.currPosition, diceRolls: details.totalRolls, questions: details.questions }
+        return { ...prev, blockId: details ? details.currPosition : null, diceRolls: details ? details.totalRolls : null, questions: details ? details.questions  : null}
       });
     }
     else {
@@ -39,6 +41,8 @@ export default function MapPage() {
   }, []);
   return (
     <div className='map-page-container'>
+      <Timer/>
+      <DiceObject/>
       <Map pawn={pawn} />
     </div>
   )
