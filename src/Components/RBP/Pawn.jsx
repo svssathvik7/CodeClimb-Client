@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import human1 from '../Assets/Human1.png';
-import human2 from '../Assets/Human2.png';
-import human3 from '../Assets/Human3.png';
-import human4 from '../Assets/Human4.png';
+import human1 from '../../Assets/Human1.png';
+import human2 from '../../Assets/Human2.png';
+import human3 from '../../Assets/Human3.png';
+import human4 from '../../Assets/Human4.png';
 import { useInView, motion } from 'framer-motion';
 
 const pawnArray = [human1, human2, human3, human4];

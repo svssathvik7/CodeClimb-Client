@@ -70,7 +70,7 @@ const snakes = {
     17: {
         snakeId: "sn9",
         start: 17,
-        end: 6,
+        end: 7,
         difficulty: "easy",
         snake: s1,
         questionId: "#"
