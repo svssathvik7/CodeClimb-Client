@@ -6,12 +6,12 @@ import axios from 'axios';
 import Timer from '../../Utilities/Timer';
 import DiceObject from '../../Utilities/Dice';
 import { diceContext } from '../../Contexts/DiceContext';
-import UserContext from '../../Contexts/UserContext';
+import { userContextProvider } from '../../Contexts/UserContext';
 export default function MapPage() {
   const { diceRoll } = useContext(diceContext);
   const params = new URLSearchParams(window.location.search);
   const regNo = params.get('param1');
-  const {setUser} = useContext(UserContext);
+  const {setUser} = useContext(userContextProvider);
   const [guide,setGuide] = useState(false)
   const [pawn, setPawn] = useState({
     blockId: null,
