@@ -6,10 +6,12 @@ import axios from 'axios';
 import Timer from '../../Utilities/Timer';
 import DiceObject from '../../Utilities/Dice';
 import { diceContext } from '../../Contexts/DiceContext';
+import UserContext from '../../Contexts/UserContext';
 export default function MapPage() {
   const { diceRoll } = useContext(diceContext);
   const params = new URLSearchParams(window.location.search);
   const regNo = params.get('param1');
+  const {setUser} = useContext(UserContext);
   const [guide,setGuide] = useState(false)
   const [pawn, setPawn] = useState({
     blockId: null,
@@ -20,6 +22,7 @@ export default function MapPage() {
   const getPosition = async () => {
     const response = await axios.post('http://localhost:3001/api/details/getPosition', { regNo: regNo });
     const data = response.data;
+    setUser(regNo);
     if (data.status === true) {
       const details = data.userDetails;
       setPawn((prev) => {

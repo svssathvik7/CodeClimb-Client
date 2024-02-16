@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Map.css';
-import Timer from '../../Utilities/Timer';
 import Row from '../RBP/Row';
 const Map = (props) => {
   const { pawn, updatePawn } = props;

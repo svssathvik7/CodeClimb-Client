@@ -1,18 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet';
 import './QPopUp.css';
 import axios from 'axios';
+import UserContext from "../../Contexts/UserContext";
 const QPopUp = (props) => {
     const { giveUp, from } = props;
-    const [code, setCode] = useState('');
-
+    const [code, setCode] = useState(``);
+    const {user} = useContext(UserContext);
     const changeCode = (e) => {
         const { value } = e.target;
         setCode(value);
     }
     const pushCode = async (e) => {
         try {
-            const response = await axios.post('#', { code: code });
+            // replace hard values with qId and etc after frontend
+            const response = await axios.post('http://localhost:3001/api/codes/run-code', { 
+                code: code,
+            });
             const data = response.data;
             console.log(data);
         }
