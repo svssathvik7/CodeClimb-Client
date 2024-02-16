@@ -1,0 +1,12 @@
+#dice-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1%;
+    cursor: pointer;
+}
+
+.dice {
+    pointer-events: none !important;
+    cursor: crosshair;
+}

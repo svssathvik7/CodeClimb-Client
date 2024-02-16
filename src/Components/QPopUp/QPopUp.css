@@ -15,6 +15,33 @@
     padding: 15px;
 }
 
+.pop-up-block>* {
+    padding: 15px 0px;
+}
+
+.pop-up-question-block {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.pop-up-question-block>* {
+    padding: 10px 0px;
+}
+
+.pop-up-question-block p {
+    color: black;
+    font-size: 3em;
+}
+
+.pop-up-question-block .question-block {
+    padding-left: 3em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1em;
+    color: black;
+}
+
 .pop-up-code-block {
     width: 100%;
     display: flex;

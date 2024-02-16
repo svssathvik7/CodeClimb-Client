@@ -7,7 +7,7 @@ import Pawn from './Pawn';
 import { diceContext } from '../../Contexts/DiceContext.jsx';
 const Block = (props) => {
     const { setDiceRoll } = useContext(diceContext);
-    const { blockId, pawn, updatePawn } = props;
+    const { blockId, pawn, updatePawn, regNo, setPawn } = props;
     const [block, setBlock] = useState({
         isPawn: blockId === pawn.blockId ? true : false,
         blockId: blockId,
@@ -38,8 +38,8 @@ const Block = (props) => {
                 {block.noOfUsers}
             </span>
             {block.isPawn ? <Pawn pawn={pawn} /> : <p className='block-number'>{block.blockId}</p>}
-            {(block.isPawn && block.isSnake) ? <QPopUp from='snake' giveUp={giveUp} /> : null}
-            {(block.isPawn && block.isLadder) ? <QPopUp from='ladder' giveUp={giveUp} /> : null}
+            {(block.isPawn && block.isSnake) ? <QPopUp pawn={pawn} setPawn={setPawn} regNo={regNo} difficulty={block.isSnake.difficulty} from='snake' giveUp={giveUp} /> : null}
+            {(block.isPawn && block.isLadder) ? <QPopUp pawn={pawn} setPawn={setPawn} regNo={regNo} difficulty={block.isLadder.difficulty} from='ladder' giveUp={giveUp} /> : null}
         </div>
     )
 }

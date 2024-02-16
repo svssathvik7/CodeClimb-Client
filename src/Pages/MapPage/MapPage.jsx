@@ -3,19 +3,23 @@ import Map from '../../Components/Map/Map'
 import "./MapPage.css";
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import Timer from '../../Utilities/Timer';
-import DiceObject from '../../Utilities/Dice';
+import Timer from '../../Utilities/Timer/Timer';
+import DiceObject from '../../Utilities/Dice/Dice';
 import { diceContext } from '../../Contexts/DiceContext';
 import { userContextProvider } from '../../Contexts/UserContext';
 export default function MapPage() {
   const { diceRoll } = useContext(diceContext);
   const params = new URLSearchParams(window.location.search);
   const regNo = params.get('param1');
-  const {setUser} = useContext(userContextProvider);
-  const [guide,setGuide] = useState(false)
+  const { setUser } = useContext(userContextProvider);
+  const [guide, setGuide] = useState(false)
   const [pawn, setPawn] = useState({
     blockId: null,
-    questions: [],
+    questions: {
+      easy: [],
+      medium: [],
+      hard: []
+    },
     diceRolls: 0,
     bonus: 0,
   });
@@ -73,8 +77,8 @@ export default function MapPage() {
   return (
     <div className='map-page-container'>
       <Timer />
+      <Map setPawn={setPawn} regNo={regNo} updatePawn={updatePawn} pawn={pawn} />
       <DiceObject />
-      <Map updatePawn={updatePawn} pawn={pawn} />
     </div>
   )
 }
