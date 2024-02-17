@@ -1,16 +1,15 @@
 import s1 from '../Assets/snake.gif';
 import s2 from '../Assets/snake2.gif';
-// import s3 from '../Assets/Snake1.png';
-// import s4 from '../Assets/Snake5.png';
-var s3,s4;
+import s3 from '../Assets/snake3.gif';
 const snakes = {
-    99: {
+    98: {
         snakeId: "sn1",
-        start: 99,
-        end: 4,
+        start: 98,
+        end: 3,
         difficulty: "hard",
         snake: s3,
-        questionId: "#"
+        questionId: "#",
+        title: "You will be going to block 3"
     },
     91: {
         snakeId: "sn2",
@@ -26,7 +25,8 @@ const snakes = {
         end: 10,
         difficulty: "hard",
         snake: s3,
-        questionId: "#"
+        questionId: "#",
+        title: "You will be going to block 10"
     },
     62: {
         snakeId: "sn4",

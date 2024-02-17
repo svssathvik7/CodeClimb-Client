@@ -8,6 +8,7 @@
 }
 .snakes-gif{
     mix-blend-mode: darken;
+    z-index: 5000!important;
 }
 .block-number {
     z-index: 100;
@@ -35,7 +36,7 @@
 .block-head img {
     position: absolute;
     left: 50%;
-    z-index: 100!important;
+    z-index: 5000!important;
     pointer-events: none;
 }
 
@@ -56,18 +57,11 @@
 }
 
 .snake-id-75 {
-    transform: translate(-18%, 51%) rotate(-62deg);
-    width: 45dvw;
-    z-index: 93 !important;
-    display: none;
+    transform: translate(-160px,10px) scale(0.5);
 }
 
-.snake-id-99 {
-    z-index: 94 !important;
-    position: absolute;
-    width: 52dvw;
-    transform: translate(-35%, 57%) rotate(-48deg);
-    display: none;
+.snake-id-98 {
+    transform: translate(-160px,0px) scale(0.5);
 }
 
 .snake-id-62 {
@@ -86,7 +80,41 @@
     transform: translate(200%, -17%) rotate(68deg);
     display: none;
 }
+#block-id-names98{
+    box-shadow: inset 4px 4px 32px red;
+}
 
+#block-id-names75{
+    box-shadow: inset 4px 4px 32px red;
+}
+
+
+#block-id-names62{
+    box-shadow: inset 4px 4px 32px yellow;
+}
+
+#block-id-names91{
+    box-shadow: inset 4px 4px 32px yellow;
+}
+
+#block-id-names85{
+    box-shadow: inset 4px 4px 32px green;
+}
+
+#block-id-names55{
+    box-shadow: inset 4px 4px 32px green;
+}
+
+#block-id-names44{
+    box-shadow: inset 4px 4px 32px green;
+}
+
+#block-id-names26{
+    box-shadow: inset 4px 4px 32px green;
+}
+#block-id-names13{
+    box-shadow: inset 4px 4px 32px green;
+}
 .block-id-19,
 .block-id-30,
 .block-id-41,
@@ -97,7 +125,6 @@
     transform: translate(-50%, -50%);
     height: 14em;
 }
-
 .block-id-65 {
     width: 5dvw;
     transform: translate(362%, -20%) rotate(66deg);
