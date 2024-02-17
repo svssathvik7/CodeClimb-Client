@@ -3,10 +3,9 @@
     height: 100%;
     overflow: hidden;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
     padding: 5em 0em;
     background-color: #D7A357;
+    padding-left: 2em;
 }
 
 body {
@@ -15,17 +14,16 @@ body {
     justify-content: center;
 }
 
-#game-guide-button {
+.guide-lines-button {
     position: fixed;
     bottom: 1rem;
     right: 1rem;
-    padding: 10px;
-    border-radius: 50%;
-    border: 3px solid #3F0D10;
-    background-color: #EAD196;
+    width: 2em;
+    height: 2em;
     transition: transform 0.2s ease;
+    cursor: pointer;
 }
 
-#game-guide-button:active {
+.guide-lines-button:active {
     transform: scale(1.1);
 }

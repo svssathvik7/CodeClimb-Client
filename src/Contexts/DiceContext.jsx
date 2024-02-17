@@ -5,7 +5,7 @@ export const diceContextProvider = createContext(null);
 const DiceContext = ({ children }) => {
     const [diceRoll, setDiceRoll] = useState({
         value: 0,
-        state: true
+        state: false
     });
     return (
         <diceContextProvider.Provider value={{ diceRoll, setDiceRoll }}>

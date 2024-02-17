@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react'
 export const loginDataContextProvider = createContext(null);
 const LoginDataContext = ({ children }) => {
     const [formData, setFormData] = useState({
-        username: '',
+        username: localStorage.getItem('user') || '',
         password: ''
     });
     return (

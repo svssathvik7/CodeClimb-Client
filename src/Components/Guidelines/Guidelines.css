@@ -1,5 +1,4 @@
-
-#Guide-Lines{
+#Guide-Lines {
     position: absolute;
     top: 17%;
     left: 9.5%;
@@ -14,26 +13,30 @@
     padding: 2rem 4rem;
     animation: scaleAnimation 0.7s ease;
     position: fixed;
-    z-index: 1500;
+    z-index: 9999;
 }
-#Guidelines-header{
+
+#Guidelines-header {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     color: #3F0D10;
 }
+
 @keyframes scaleAnimation {
     0% {
         top: 0;
         opacity: 0;
     }
-    100%{
-        top:17%;
+
+    100% {
+        top: 17%;
         opacity: 1;
     }
 }
-#guidelines ul{
+
+#guidelines ul {
     display: flex;
     flex-direction: column;
     gap: 3px;

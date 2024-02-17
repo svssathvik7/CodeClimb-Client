@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { userContextProvider } from '../../Contexts/UserContext';
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
+import { diceContextProvider } from '../../Contexts/DiceContext';
 const QPopUp = (props) => {
     const { formData } = useContext(loginDataContextProvider);
     const regNo = formData.username;
@@ -12,6 +13,7 @@ const QPopUp = (props) => {
     const [code, setCode] = useState(``);
     const [openCompiler, setOpenCompiler] = useState(false);
     const { user } = useContext(userContextProvider);
+    const { setDiceRoll } = useContext(diceContextProvider);
     const [question, setQuestion] = useState();
     const [questionHeading, setQuestionHeading] = useState();
     const changeCode = (e) => {
@@ -113,6 +115,9 @@ const QPopUp = (props) => {
         if (pawn?.questions?.hard?.length === 7) {
             reset('hard');
         }
+        setDiceRoll((prev) => {
+            return { ...prev, state: true }
+        });
 
     }, [formData]);
     return (

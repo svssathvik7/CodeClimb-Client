@@ -9,14 +9,16 @@ import { diceContextProvider } from '../../Contexts/DiceContext';
 import { userContextProvider } from '../../Contexts/UserContext';
 import LeaderBoard from '../../Components/Leaderboard/LeaderBoard';
 import { leaderBoardContextProvider } from '../../Contexts/LeaderBoardContext';
+import { IoIosInformationCircle } from "react-icons/io";
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
+import Guidelines from '../../Components/Guidelines/Guidelines';
 export default function MapPage() {
   const { showBoard } = useContext(leaderBoardContextProvider);
   const { formData } = useContext(loginDataContextProvider);
   const { diceRoll } = useContext(diceContextProvider);
   const regNo = formData?.username;
   const { setUser } = useContext(userContextProvider);
-  const [guide, setGuide] = useState(false)
+  const [guidelines, setGuideLines] = useState(false);
   const [pawn, setPawn] = useState({
     blockId: null,
     questions: {
@@ -26,6 +28,7 @@ export default function MapPage() {
     },
     diceRolls: 0,
     bonus: 0,
+    score: 0
   });
   const getPosition = async () => {
     const response = await axios.post('http://localhost:3001/api/details/getPosition', { regNo: regNo });
@@ -55,7 +58,7 @@ export default function MapPage() {
     const data = response.data;
     if (data.status) {
       setPawn((prev) => {
-        return { ...prev, blockId: data.newPosition }
+        return { ...prev, blockId: data.newPosition, }
       });
     }
     else {
@@ -83,6 +86,10 @@ export default function MapPage() {
       <Map setPawn={setPawn} updatePawn={updatePawn} pawn={pawn} />
       <DiceObject />
       {showBoard && <LeaderBoard />}
+      <IoIosInformationCircle className='guide-lines-button' onClick={() => {
+        setGuideLines(!guidelines);
+      }} />
+      {guidelines && <Guidelines />}
     </div>
   )
 }

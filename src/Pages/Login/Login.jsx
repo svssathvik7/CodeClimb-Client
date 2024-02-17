@@ -43,6 +43,8 @@ export default function Login() {
                     progress: undefined,
                     theme: "dark",
                 });
+                const regNo = formData?.username;
+                localStorage.setItem('user', regNo);
                 navigate('/map');
             }
         } catch (error) {

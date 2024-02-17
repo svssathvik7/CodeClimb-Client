@@ -7,8 +7,8 @@ import Pawn from './Pawn';
 import { diceContextProvider } from '../../Contexts/DiceContext.jsx';
 import { leaderBoardContextProvider } from '../../Contexts/LeaderBoardContext.js';
 const Block = (props) => {
-    const { setDiceRoll } = useContext(diceContextProvider);
     const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
+    const { setDiceRoll } = useContext(diceContextProvider);
     const { blockId, pawn, updatePawn, setPawn } = props;
     const [block, setBlock] = useState({
         isPawn: blockId === pawn.blockId ? true : false,
@@ -24,15 +24,21 @@ const Block = (props) => {
         });
     }
     const changePositionOnSuccess = (from) => {
+        setDiceRoll((prev) => {
+            return { ...prev, state: false }
+        })
         if (from === 'snake') {
-            updatePawn(1, from);
+            updatePawn(blockId + 1, from);
         }
         else {
-            const value = (block?.isLadder?.end - block?.isLadder?.start);
+            const value = (block?.isLadder?.end);
             updatePawn(value, from);
         }
     }
     const giveUp = (from) => {
+        setDiceRoll((prev) => {
+            return { ...prev, state: false }
+        })
         setBlock((prev) => {
             return { ...prev, isPawn: false }
         });

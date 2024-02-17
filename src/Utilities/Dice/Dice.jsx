@@ -5,15 +5,19 @@ import { diceContextProvider } from '../../Contexts/DiceContext';
 import ReactDice, { ReactDiceRef } from 'react-dice-complete'
 export default function DiceObject() {
   const reactDice = useRef(null);
-  const { setDiceRoll } = useContext(diceContextProvider);
+  const { diceRoll, setDiceRoll } = useContext(diceContextProvider);
   const [select, setSelect] = useState(false);
+  const [disableButton, setDisableButton] = useState(true);
   const rollDone = (totalValue, values) => {
+    setDisableButton(!disableButton);
     if (select === true) {
       setDiceRoll((prev) => {
         return { ...prev, value: totalValue }
       });
     }
   }
+  useEffect(() => {
+  }, [diceRoll]);
   return <div id='dice-box'>
     <ReactDice
       numDice={1}
@@ -25,8 +29,9 @@ export default function DiceObject() {
       defaultRoll={1}
       dieCornerRadius={8}
     />
-    <button onClick={async () => {
+    <button disabled={disableButton || diceRoll.state} onClick={async () => {
       setSelect(true);
+      setDisableButton(!disableButton);
       await reactDice.current?.rollAll();
     }}>Roll Dice</button>
   </div>
