@@ -8,10 +8,23 @@
     padding-left: 2em;
 }
 
+.score-block {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 9999;
+}
+
 body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.leader-board-button {
+    position: fixed;
+    top: 3rem;
+    left: 1rem;
 }
 
 .guide-lines-button {

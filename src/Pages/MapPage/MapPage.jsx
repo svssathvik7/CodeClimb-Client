@@ -13,7 +13,7 @@ import { IoIosInformationCircle } from "react-icons/io";
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 import Guidelines from '../../Components/Guidelines/Guidelines';
 export default function MapPage() {
-  const { showBoard } = useContext(leaderBoardContextProvider);
+  const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
   const { formData } = useContext(loginDataContextProvider);
   const { diceRoll } = useContext(diceContextProvider);
   const regNo = formData?.username;
@@ -37,7 +37,7 @@ export default function MapPage() {
     if (data.status === true) {
       const details = data.userDetails;
       setPawn((prev) => {
-        return { ...prev, blockId: details ? details.currPosition : null, diceRolls: details ? details.totalRolls : null, questions: details ? details.questions : null }
+        return { ...prev, blockId: details ? details.currPosition : null, diceRolls: details ? details.totalRolls : null, questions: details ? details.questions : null, score: details ? details.score : null }
       });
     }
     else {
@@ -58,7 +58,7 @@ export default function MapPage() {
     const data = response.data;
     if (data.status) {
       setPawn((prev) => {
-        return { ...prev, blockId: data.newPosition, }
+        return { ...prev, blockId: data.newPosition, score: data.score }
       });
     }
     else {
@@ -82,6 +82,9 @@ export default function MapPage() {
   }, [diceRoll]);
   return (
     <div className='map-page-container'>
+      <div className='score-block'>
+        <p>Score : {pawn.score}</p>
+      </div>
       <Timer />
       <Map setPawn={setPawn} updatePawn={updatePawn} pawn={pawn} />
       <DiceObject />
@@ -90,6 +93,9 @@ export default function MapPage() {
         setGuideLines(!guidelines);
       }} />
       {guidelines && <Guidelines />}
+      <button className='leader-board-button' onClick={() => {
+        setShowBoard(!showBoard);
+      }}>{showBoard ? 'Close' : 'Show'} Leader Board</button>
     </div>
   )
 }
