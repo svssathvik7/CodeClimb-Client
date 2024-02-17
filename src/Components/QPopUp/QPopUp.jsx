@@ -5,11 +5,12 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { userContextProvider } from '../../Contexts/UserContext';
 const QPopUp = (props) => {
-    const { giveUp, from, difficulty, regNo, pawn, setPawn } = props;
+    const { giveUp, from, difficulty, regNo, pawn, setPawn, changePositionOnSuccess } = props;
     const [code, setCode] = useState(``);
     const [openCompiler, setOpenCompiler] = useState(false);
     const { user } = useContext(userContextProvider);
     const [question, setQuestion] = useState();
+    const [questionHeading, setQuestionHeading] = useState();
     const changeCode = (e) => {
         const { value } = e.target;
         setCode(value);
@@ -26,6 +27,7 @@ const QPopUp = (props) => {
             });
             const data = response.data;
             if (data.status) {
+                changePositionOnSuccess(from);
                 toast.success(`${data.message}!`, {
                     position: "top-right",
                     autoClose: 5000,
@@ -38,6 +40,7 @@ const QPopUp = (props) => {
                 });
             }
             else {
+                giveUp(from);
                 toast.error("Code failed!", {
                     position: "top-right",
                     autoClose: 5000,
@@ -82,8 +85,20 @@ const QPopUp = (props) => {
             console.log('Error Occured');
         }
     }
+    const changeQuestionHeading = (difficulty) => {
+        if (difficulty === 'easy') {
+            setQuestionHeading("Correct the syntax and rewrite the code in the box below:");
+        }
+        else if (difficulty === 'medium') {
+            setQuestionHeading("Fill the missing Code to get the desired output:");
+        }
+        else {
+            setQuestionHeading('Solve the problem:');
+        }
+    }
     useState(() => {
         fetchQuestion(difficulty);
+        changeQuestionHeading(difficulty);
         if (pawn?.questions?.easy?.length === 10) {
             reset('easy');
         }
@@ -93,12 +108,13 @@ const QPopUp = (props) => {
         if (pawn?.questions?.hard?.length === 7) {
             reset('hard');
         }
+
     }, []);
     console.log(question);
     return (
         <div className='pop-up-block'>
             {!openCompiler && <div className='pop-up-question-block'>
-                <p>Solve the Problem.</p>
+                <p>{questionHeading}</p>
                 <div className='question-block'>
                     {question?.question}
                 </div>
