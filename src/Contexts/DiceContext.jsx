@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react'
 
-export const diceContext = createContext(null);
+export const diceContextProvider = createContext(null);
 
 const DiceContext = ({ children }) => {
     const [diceRoll, setDiceRoll] = useState({
@@ -8,9 +8,9 @@ const DiceContext = ({ children }) => {
         state: true
     });
     return (
-        <diceContext.Provider value={{ diceRoll, setDiceRoll }}>
+        <diceContextProvider.Provider value={{ diceRoll, setDiceRoll }}>
             {children}
-        </diceContext.Provider>
+        </diceContextProvider.Provider>
     )
 }
 export default DiceContext;

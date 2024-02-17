@@ -4,8 +4,11 @@ import './QPopUp.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { userContextProvider } from '../../Contexts/UserContext';
+import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 const QPopUp = (props) => {
-    const { giveUp, from, difficulty, regNo, pawn, setPawn, changePositionOnSuccess } = props;
+    const { formData } = useContext(loginDataContextProvider);
+    const regNo = formData.username;
+    const { giveUp, from, difficulty, pawn, setPawn, changePositionOnSuccess } = props;
     const [code, setCode] = useState(``);
     const [openCompiler, setOpenCompiler] = useState(false);
     const { user } = useContext(userContextProvider);
@@ -24,7 +27,7 @@ const QPopUp = (props) => {
                 code: code,
                 submissionId: submissionId,
                 qId: question.qId,
-                difficulty : difficulty
+                difficulty: difficulty
             });
             const data = response.data;
             if (data.status) {
@@ -111,8 +114,7 @@ const QPopUp = (props) => {
             reset('hard');
         }
 
-    }, []);
-    console.log(question);
+    }, [formData]);
     return (
         <div className='pop-up-block'>
             {!openCompiler && <div className='pop-up-question-block'>

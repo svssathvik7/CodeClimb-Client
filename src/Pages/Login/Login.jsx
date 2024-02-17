@@ -1,14 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import "./Login.css";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 export default function Login() {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        username: '',
-        password: ''
-    });
+    const { formData, setFormData } = useContext(loginDataContextProvider);
     const handleFormChange = (e) => {
         setFormData({
             ...formData, [e.target.name]: e.target.value
@@ -46,8 +44,6 @@ export default function Login() {
                     theme: "dark",
                 });
                 navigate('/map');
-                const url = `/map?param1=${formData.username}`;
-                window.location.href = url;
             }
         } catch (error) {
             toast.error("Login failed!", {

@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 // import Dice from 'react-dice-roll';
 import "./Dice.css"
-import { diceContext } from '../../Contexts/DiceContext';
+import { diceContextProvider } from '../../Contexts/DiceContext';
 import ReactDice, { ReactDiceRef } from 'react-dice-complete'
 export default function DiceObject() {
   const reactDice = useRef(null);
-  const { setDiceRoll } = useContext(diceContext);
+  const { setDiceRoll } = useContext(diceContextProvider);
   const [select, setSelect] = useState(false);
   const rollDone = (totalValue, values) => {
     if (select === true) {

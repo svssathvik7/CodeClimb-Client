@@ -5,15 +5,16 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import Timer from '../../Utilities/Timer/Timer';
 import DiceObject from '../../Utilities/Dice/Dice';
-import { diceContext } from '../../Contexts/DiceContext';
+import { diceContextProvider } from '../../Contexts/DiceContext';
 import { userContextProvider } from '../../Contexts/UserContext';
 import LeaderBoard from '../../Components/Leaderboard/LeaderBoard';
 import { leaderBoardContextProvider } from '../../Contexts/LeaderBoardContext';
+import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 export default function MapPage() {
-  const {showBoard} = useContext(leaderBoardContextProvider);
-  const { diceRoll } = useContext(diceContext);
-  const params = new URLSearchParams(window.location.search);
-  const regNo = params.get('param1');
+  const { showBoard } = useContext(leaderBoardContextProvider);
+  const { formData } = useContext(loginDataContextProvider);
+  const { diceRoll } = useContext(diceContextProvider);
+  const regNo = formData?.username;
   const { setUser } = useContext(userContextProvider);
   const [guide, setGuide] = useState(false)
   const [pawn, setPawn] = useState({
@@ -50,7 +51,6 @@ export default function MapPage() {
     }
   }
   const updatePawn = async (value, from) => {
-    console.log(value, from);
     const response = await axios.post('http://localhost:3001/api/user/metrics/updatePosition', { diceRoll: value, regNo: regNo, from: from });
     const data = response.data;
     if (data.status) {
@@ -73,16 +73,16 @@ export default function MapPage() {
   }
   useEffect(() => {
     getPosition();
-  }, []);
+  }, [formData]);
   useEffect(() => {
     updatePawn(diceRoll.value, 'dice-roll');
   }, [diceRoll]);
   return (
     <div className='map-page-container'>
       <Timer />
-      <Map setPawn={setPawn} regNo={regNo} updatePawn={updatePawn} pawn={pawn} />
+      <Map setPawn={setPawn} updatePawn={updatePawn} pawn={pawn} />
       <DiceObject />
-      {showBoard && <LeaderBoard/>}
+      {showBoard && <LeaderBoard />}
     </div>
   )
 }
