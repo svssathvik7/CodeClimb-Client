@@ -20,6 +20,15 @@ const Block = (props) => {
             return { ...prev, isPawn: blockId === pawn.blockId }
         });
     }
+    const changePositionOnSuccess = (from) => {
+        if (from === 'snake') {
+            updatePawn(1, from);
+        }
+        else {
+            const value = (block?.isLadder?.end - block?.isLadder?.start);
+            updatePawn(value, from);
+        }
+    }
     const giveUp = (from) => {
         setBlock((prev) => {
             return { ...prev, isPawn: false }
@@ -38,8 +47,8 @@ const Block = (props) => {
                 {block.noOfUsers}
             </span>
             {block.isPawn ? <Pawn pawn={pawn} /> : <p className='block-number'>{block.blockId}</p>}
-            {(block.isPawn && block.isSnake) ? <QPopUp pawn={pawn} setPawn={setPawn} regNo={regNo} difficulty={block.isSnake.difficulty} from='snake' giveUp={giveUp} /> : null}
-            {(block.isPawn && block.isLadder) ? <QPopUp pawn={pawn} setPawn={setPawn} regNo={regNo} difficulty={block.isLadder.difficulty} from='ladder' giveUp={giveUp} /> : null}
+            {(block.isPawn && block.isSnake) ? <QPopUp pawn={pawn} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} regNo={regNo} difficulty={block.isSnake.difficulty} from='snake' giveUp={giveUp} /> : null}
+            {(block.isPawn && block.isLadder) ? <QPopUp pawn={pawn} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} regNo={regNo} difficulty={block.isLadder.difficulty} from='ladder' giveUp={giveUp} /> : null}
         </div>
     )
 }

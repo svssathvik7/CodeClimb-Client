@@ -32,7 +32,7 @@
 
 .pop-up-question-block p {
     color: black;
-    font-size: 3em;
+    font-size: 1.5em;
 }
 
 .pop-up-question-block .question-block {
@@ -72,7 +72,6 @@
 
 .pop-up-compiler-block {
     display: flex;
-    background-color: rgb(218, 135, 135);
 }
 
 .pop-up-compiler-block iframe {
