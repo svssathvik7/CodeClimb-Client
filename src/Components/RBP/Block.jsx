@@ -6,7 +6,6 @@ import './RBP.css';
 import Pawn from './Pawn';
 import { diceContextProvider } from '../../Contexts/DiceContext.jsx';
 const Block = (props) => {
-    const { setDiceRoll } = useContext(diceContextProvider);
     const { blockId, pawn, updatePawn, setPawn } = props;
     const [block, setBlock] = useState({
         isPawn: blockId === pawn.blockId ? true : false,
@@ -22,9 +21,6 @@ const Block = (props) => {
         });
     }
     const changePositionOnSuccess = (from) => {
-        setDiceRoll((prev) => {
-            return { ...prev, state: false }
-        });
         setBlock((prev) => {
             return { ...prev, isPawn: false }
         });
@@ -33,10 +29,6 @@ const Block = (props) => {
         updatePawn(value, 'ladder-or-snake');
     }
     const giveUp = (from) => {
-        console.log('gived up');
-        setDiceRoll((prev) => {
-            return { ...prev, state: false }
-        })
         setBlock((prev) => {
             return { ...prev, isPawn: false }
         });

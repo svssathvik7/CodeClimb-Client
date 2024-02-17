@@ -116,32 +116,34 @@ const QPopUp = (props) => {
     }, []);
     return (
         <div className='pop-up-block'>
-            {!openCompiler && <div className='pop-up-question-block'>
-                <p>{questionHeading}</p>
-                <div className='question-block'>
-                    {question?.question}
-                </div>
-            </div>}
-            {(difficulty === 'hard' && openCompiler === true) &&
-                <div className='pop-up-compiler-block'>
-                    <div data-pym-src="https://www.jdoodle.com/a/7fRG"></div>
-                    <Helmet>
-                        <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript" />
-                    </Helmet>
-                </div>
+            <div className='pop-up-child'>
+                {!openCompiler && <div className='pop-up-question-block'>
+                    <p>{questionHeading}</p>
+                    <div className='question-block'>
+                        {question?.question}
+                    </div>
+                </div>}
+                {(difficulty === 'hard' && openCompiler === true) &&
+                    <div className='pop-up-compiler-block'>
+                        <div data-pym-src="https://www.jdoodle.com/a/7fRG"></div>
+                        <Helmet>
+                            <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript" />
+                        </Helmet>
+                    </div>
 
-            }
-            {difficulty === 'hard' && <div>
-                <button onClick={() => {
-                    setOpenCompiler(!openCompiler);
-                }}>{openCompiler ? "Close Compiler" : "Open Compiler"}</button></div>}
-            <div className='pop-up-code-block'>
-                <textarea onChange={changeCode} name="code" id="code" cols="30" rows="2" placeholder='Paste the code here to submit.'></textarea>
-                <div className='pop-up-bottom-block'>
-                    <button onClick={pushCode}>Submit</button>
+                }
+                {difficulty === 'hard' && <div>
                     <button onClick={() => {
-                        giveUp(from);
-                    }}>Give Up</button>
+                        setOpenCompiler(!openCompiler);
+                    }}>{openCompiler ? "Close Compiler" : "Open Compiler"}</button></div>}
+                <div className='pop-up-code-block'>
+                    <textarea onChange={changeCode} name="code" id="code" cols="30" rows="2" placeholder='Paste the code here to submit.'></textarea>
+                    <div className='pop-up-bottom-block'>
+                        <button onClick={pushCode}>Submit</button>
+                        <button onClick={() => {
+                            giveUp(from);
+                        }}>Give Up</button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -4,24 +4,30 @@ import "./Dice.css"
 import { diceContextProvider } from '../../Contexts/DiceContext';
 import ReactDice, { ReactDiceRef } from 'react-dice-complete'
 export default function DiceObject() {
-  const reactDice = useRef(null);
+  // const reactDice = useRef(null);
   const { diceRoll, setDiceRoll } = useContext(diceContextProvider);
-  const [select, setSelect] = useState(false);
-  const [disableButton, setDisableButton] = useState(true);
-  const rollDone = (totalValue, values) => {
-    setDisableButton(!disableButton);
-    console.log(totalValue, select);
-    if (select === true) {
-      setDiceRoll((prev) => {
-        return { ...prev, value: totalValue }
-      });
-      setSelect(false);
-    }
+  // const [select, setSelect] = useState(false);
+  // const [disableButton, setDisableButton] = useState(true);
+  // const rollDone = (totalValue, values) => {
+  //   setDisableButton(!disableButton);
+  //   console.log(totalValue, select);
+  //   if (select === true) {
+  //     setDiceRoll((prev) => {
+  //       return { ...prev, value: totalValue }
+  //     });
+  //     setSelect(false);
+  //   }
+  // }
+  // useEffect(() => {
+  // }, [diceRoll]);
+  const updateDiceRoll = () => {
+    const random = Math.floor(Math.random() * 6) + 1;
+    setDiceRoll((prev) => {
+      return { ...prev, value: random }
+    });
   }
-  useEffect(() => {
-  }, [diceRoll]);
-  return <div id='dice-box'>
-    <ReactDice
+  return <div id='dice-box' onClick={updateDiceRoll}>
+    {/* <ReactDice
       numDice={1}
       ref={reactDice}
       rollDone={rollDone}
@@ -35,6 +41,6 @@ export default function DiceObject() {
       setSelect(true);
       setDisableButton(!disableButton);
       await reactDice.current?.rollAll();
-    }}>Roll Dice</button>
+    }}>Roll Dice</button> */}
   </div>
 }
