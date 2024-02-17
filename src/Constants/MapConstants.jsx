@@ -1,7 +1,8 @@
-import s1 from '../Assets/Snake6.png';
-import s2 from '../Assets/Snake7.png';
-import s3 from '../Assets/Snake1.png';
-import s4 from '../Assets/Snake5.png';
+import s1 from '../Assets/snake.gif';
+import s2 from '../Assets/snake2.gif';
+// import s3 from '../Assets/Snake1.png';
+// import s4 from '../Assets/Snake5.png';
+var s3,s4;
 const snakes = {
     99: {
         snakeId: "sn1",
@@ -11,10 +12,10 @@ const snakes = {
         snake: s3,
         questionId: "#"
     },
-    97: {
+    91: {
         snakeId: "sn2",
-        start: 97,
-        end: 73,
+        start: 91,
+        end: 51,
         difficulty: "medium",
         snake: s2,
         questionId: "#"
@@ -27,10 +28,10 @@ const snakes = {
         snake: s3,
         questionId: "#"
     },
-    59: {
+    62: {
         snakeId: "sn4",
-        start: 59,
-        end: 8,
+        start: 62,
+        end: 21,
         difficulty: "medium",
         snake: s2,
         questionId: "#"
@@ -43,18 +44,18 @@ const snakes = {
         snake: s1,
         questionId: "#"
     },
-    47: {
+    44: {
         snakeId: "sn6",
-        start: 47,
-        end: 25,
+        start: 44,
+        end: 23,
         difficulty: "easy",
         snake: s1,
         questionId: "#"
     },
-    43: {
+    85: {
         snakeId: "sn7",
-        start: 43,
-        end: 21,
+        start: 85,
+        end: 64,
         difficulty: "easy",
         snake: s1,
         questionId: "#"
@@ -64,13 +65,13 @@ const snakes = {
         start: 26,
         end: 3,
         difficulty: "easy",
-        snake: s4,
+        snake: s1,
         questionId: "#"
     },
-    17: {
+    13: {
         snakeId: "sn9",
-        start: 17,
-        end: 7,
+        start: 13,
+        end: 9,
         difficulty: "easy",
         snake: s1,
         questionId: "#"

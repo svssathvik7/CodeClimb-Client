@@ -6,7 +6,9 @@
 .row-head:nth-child(even) {
     flex-direction: row-reverse !important;
 }
-
+.snakes-gif{
+    mix-blend-mode: darken;
+}
 .block-number {
     z-index: 100;
     position: absolute;
@@ -18,12 +20,12 @@
 .block-head {
     width: 8dvw;
     height: 8dvw;
-    background-color: #3F0D10;
-    color: white;
+    background-color: #fff;
+    color: brown;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1.5px solid white;
+    border: thick solid brown;
     position: relative;
     flex-direction: column;
     font-size: 1.3dvw;
@@ -33,35 +35,31 @@
 .block-head img {
     position: absolute;
     left: 50%;
-    z-index: 99;
+    z-index: 100!important;
     pointer-events: none;
 }
 
 .snake-id-26 {
-    width: 30dvw;
-    transform: translate(-91%, 117%) rotate(-42deg);
-    z-index: 98 !important;
+    transform: scaleX(-1.4) translate(370px,130px);
 }
 
-.snake-id-17 {
-    width: 25dvw;
-    transform: scaleX(-1) rotate(-16deg) translate(0%, 75%);
+.snake-id-13 {
+    transform: translate(-340px,80px) scale(0.6);
 }
 
 .snake-id-55 {
-    transform: translate(-16%, 140%) rotate(43deg) scaleX(-1);
+    transform: translate(-330px, 120px);
 }
 
-.snake-id-97 {
-    width: 39dvw;
-    transform: translate(-7%, 169%) rotate(32deg);
-    z-index: 94 !important;
+.snake-id-91 {
+    transform: rotate(120deg) translate(300px,30px);
 }
 
 .snake-id-75 {
     transform: translate(-18%, 51%) rotate(-62deg);
     width: 45dvw;
     z-index: 93 !important;
+    display: none;
 }
 
 .snake-id-99 {
@@ -69,24 +67,24 @@
     position: absolute;
     width: 52dvw;
     transform: translate(-35%, 57%) rotate(-48deg);
+    display: none;
 }
 
-.snake-id-59 {
-    width: 70dvw;
-    height: 7dvw;
-    transform: translate(-15%, 324%) rotate(46deg);
-    z-index: 97 !important;
+.snake-id-62 {
+    transform: rotate(135deg) translate(340px,-20px);
 }
 
-.snake-id-43,
-.snake-id-47 {
-    transform: translate(-87%, 137%) rotate(-40deg);
+.snake-id-44 {
+    transform: translate(-460px,130px) scaleX(-0.8);
 }
-
+.snake-id-85{
+    transform: translate(-460px,120px) scaleX(-0.8) scaleY(1);
+}
 .block-id-16 {
     width: 5dvw;
     height: 20em;
     transform: translate(200%, -17%) rotate(68deg);
+    display: none;
 }
 
 .block-id-19,

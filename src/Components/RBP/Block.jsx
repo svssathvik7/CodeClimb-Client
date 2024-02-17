@@ -32,7 +32,7 @@ const Block = (props) => {
     }, [pawn]);
     return (
         <div id={'block-id-names' + block.blockId} className='block-head'>
-            {block.isSnake && <img className={'snake-id-' + block.isSnake.start} src={block.isSnake.snake} alt='snake'></img>}
+            {block.isSnake && <img className={'snake-id-' + block.isSnake.start + " snakes-gif"} src={block.isSnake.snake} alt='snake'></img>}
             {block.isLadder && <img className={'block-id-' + block.blockId} src={ladder} alt='ladder'></img>}
             <span className='no-of-users-count'>
                 {block.noOfUsers}
