@@ -23,7 +23,8 @@ const QPopUp = (props) => {
             const response = await axios.post('http://localhost:3001/api/codes/run-code', {
                 code: code,
                 submissionId: submissionId,
-                qId: question.qId
+                qId: question.qId,
+                difficulty : difficulty
             });
             const data = response.data;
             if (data.status) {
@@ -76,6 +77,7 @@ const QPopUp = (props) => {
                 else {
                     fetchQuestion(difficulty);
                 }
+                console.log(data);
             }
             else {
                 console.log(data.message);

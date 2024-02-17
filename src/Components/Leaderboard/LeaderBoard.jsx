@@ -10,7 +10,7 @@ export default function LeaderBoard() {
     <div id='leader-board-div'>
       <h2><u>LeaderBoard</u></h2>
       <ol className='leader-board-list'>
-        {leaderBoard && leaderBoard.length ? 
+        {(leaderBoard && leaderBoard.length) ? 
             leaderBoard.map((seeding,i)=>(
                 <li key={i} className='leader-board-seeding'>
                     <h4>{i+1}.{seeding?.regNo}</h4>
