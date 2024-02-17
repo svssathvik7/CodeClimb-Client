@@ -7,7 +7,10 @@ import Timer from '../../Utilities/Timer/Timer';
 import DiceObject from '../../Utilities/Dice/Dice';
 import { diceContext } from '../../Contexts/DiceContext';
 import { userContextProvider } from '../../Contexts/UserContext';
+import LeaderBoard from '../../Components/Leaderboard/LeaderBoard';
+import { leaderBoardContextProvider } from '../../Contexts/LeaderBoardContext';
 export default function MapPage() {
+  const {showBoard} = useContext(leaderBoardContextProvider);
   const { diceRoll } = useContext(diceContext);
   const params = new URLSearchParams(window.location.search);
   const regNo = params.get('param1');
@@ -79,6 +82,7 @@ export default function MapPage() {
       <Timer />
       <Map setPawn={setPawn} regNo={regNo} updatePawn={updatePawn} pawn={pawn} />
       <DiceObject />
+      {showBoard && <LeaderBoard/>}
     </div>
   )
 }

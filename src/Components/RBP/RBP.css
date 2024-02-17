@@ -138,7 +138,9 @@
     right: 5%;
     color: black;
 }
-
+.no-of-users-count{
+    cursor: pointer;
+}
 .token-block {
     position: relative;
     width: inherit;
