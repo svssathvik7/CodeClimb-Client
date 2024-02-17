@@ -73,16 +73,10 @@ const QPopUp = (props) => {
             const response = await axios.post('http://localhost:3001/api/details/getQuestion', { difficulty: difficulty, regNo: regNo });
             const data = response.data;
             if (data.status === true) {
-                if (pawn?.questions.length === 0 && !(pawn?.questions?.includes(data.question.qId))) {
-                    setQuestion(data.question);
-                    setPawn((prev) => {
-                        return { ...prev, questions: { ...prev.questions, [difficulty]: [...(prev.questions[difficulty] || []), data.question.qId] } };
-                    });
-                }
-                else {
-                    fetchQuestion(difficulty);
-                }
-                console.log(data);
+                setQuestion(data.question);
+                setPawn((prev) => {
+                    return { ...prev, questions: { ...prev.questions, [difficulty]: [...(prev.questions[difficulty] || []), data.question.qId] } };
+                });
             }
             else {
                 console.log(data.message);
@@ -93,6 +87,10 @@ const QPopUp = (props) => {
         }
     }
     const changeQuestionHeading = (difficulty) => {
+        //This is causing the unexpected behaviour,
+        // setDiceRoll((prev) => {
+        //     return { ...prev, state: true }
+        // });
         if (difficulty === 'easy') {
             setQuestionHeading("Correct the syntax and rewrite the code in the box below:");
         }
@@ -115,11 +113,7 @@ const QPopUp = (props) => {
         if (pawn?.questions?.hard?.length === 7) {
             reset('hard');
         }
-        setDiceRoll((prev) => {
-            return { ...prev, state: true }
-        });
-
-    }, [formData]);
+    }, []);
     return (
         <div className='pop-up-block'>
             {!openCompiler && <div className='pop-up-question-block'>
@@ -154,4 +148,4 @@ const QPopUp = (props) => {
     )
 }
 
-export default QPopUp
+export default QPopUp;

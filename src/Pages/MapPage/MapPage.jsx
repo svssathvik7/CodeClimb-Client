@@ -76,9 +76,11 @@ export default function MapPage() {
   }
   useEffect(() => {
     getPosition();
-  }, [formData]);
+  }, []);
   useEffect(() => {
-    updatePawn(diceRoll.value, 'dice-roll');
+    if (diceRoll.value !== 0) {
+      updatePawn(diceRoll.value, 'dice-roll');
+    }
   }, [diceRoll]);
   return (
     <div className='map-page-container'>

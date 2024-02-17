@@ -5,9 +5,7 @@ import ladder from '../../Assets/Ladder1.png';
 import './RBP.css';
 import Pawn from './Pawn';
 import { diceContextProvider } from '../../Contexts/DiceContext.jsx';
-import { leaderBoardContextProvider } from '../../Contexts/LeaderBoardContext.js';
 const Block = (props) => {
-    const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
     const { setDiceRoll } = useContext(diceContextProvider);
     const { blockId, pawn, updatePawn, setPawn } = props;
     const [block, setBlock] = useState({
@@ -26,16 +24,16 @@ const Block = (props) => {
     const changePositionOnSuccess = (from) => {
         setDiceRoll((prev) => {
             return { ...prev, state: false }
-        })
-        if (from === 'snake') {
-            updatePawn(blockId + 1, from);
-        }
-        else {
-            const value = (block?.isLadder?.end);
-            updatePawn(value, from);
-        }
+        });
+        setBlock((prev) => {
+            return { ...prev, isPawn: false }
+        });
+        const value = from === 'snake' ? block.isSnake.start + 1 : block.isLadder.end;
+        console.log(value);
+        updatePawn(value, 'ladder-or-snake');
     }
     const giveUp = (from) => {
+        console.log('gived up');
         setDiceRoll((prev) => {
             return { ...prev, state: false }
         })
@@ -43,6 +41,7 @@ const Block = (props) => {
             return { ...prev, isPawn: false }
         });
         const value = from === 'snake' ? block.isSnake.end : block.isLadder.start + 1;
+        console.log(value);
         updatePawn(value, 'ladder-or-snake');
     }
     useEffect(() => {
@@ -52,9 +51,6 @@ const Block = (props) => {
         <div id={'block-id-names' + block.blockId} className='block-head'>
             {block.isSnake && <img title={block?.title} className={'snake-id-' + block.isSnake.start + " snakes-gif"} src={block.isSnake.snake} alt='snake'></img>}
             {block.isLadder && <img className={'block-id-' + block.blockId} src={ladder} alt='ladder'></img>}
-            <span className='no-of-users-count' onClick={() => { setShowBoard(!showBoard) }}>
-                {block.noOfUsers}
-            </span>
             {block.isPawn ? <Pawn pawn={pawn} /> : <p className='block-number'>{block.blockId}</p>}
             {(block.isPawn && block.isSnake) ? <QPopUp pawn={pawn} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isSnake.difficulty} from='snake' giveUp={giveUp} /> : null}
             {(block.isPawn && block.isLadder) ? <QPopUp pawn={pawn} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isLadder.difficulty} from='ladder' giveUp={giveUp} /> : null}

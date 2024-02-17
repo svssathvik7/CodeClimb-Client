@@ -10,10 +10,12 @@ export default function DiceObject() {
   const [disableButton, setDisableButton] = useState(true);
   const rollDone = (totalValue, values) => {
     setDisableButton(!disableButton);
+    console.log(totalValue, select);
     if (select === true) {
       setDiceRoll((prev) => {
         return { ...prev, value: totalValue }
       });
+      setSelect(false);
     }
   }
   useEffect(() => {
@@ -23,7 +25,7 @@ export default function DiceObject() {
       numDice={1}
       ref={reactDice}
       rollDone={rollDone}
-      rollTime={4.5}
+      rollTime={2}
       faceColor="#3F0D10"
       dotColor='#ffffff'
       defaultRoll={1}
