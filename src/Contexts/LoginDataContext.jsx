@@ -5,8 +5,9 @@ const LoginDataContext = ({ children }) => {
         username: localStorage.getItem('user') || '',
         password: ''
     });
+    const [gameUp,setGameUp] = useState(false);
     return (
-        <loginDataContextProvider.Provider value={{ formData, setFormData }}>
+        <loginDataContextProvider.Provider value={{ formData, setFormData,gameUp,setGameUp }}>
             {children}
         </loginDataContextProvider.Provider>
     )
