@@ -25,6 +25,7 @@ const QPopUp = (props) => {
         try {
             // replace hard values with qId and etc after frontend
             const submissionId = await user + new Date().getTime();
+            
             const response = await axios.post('http://localhost:3001/api/codes/run-code', {
                 code: code,
                 submissionId: submissionId,
@@ -115,7 +116,7 @@ const QPopUp = (props) => {
         }
     }, []);
     return (
-        <div className='pop-up-block'>
+        <div className='pop-up-block' id = {openCompiler ? 'pop-up-block-hard' : undefined}>
             {!openCompiler && <div className='pop-up-question-block' >
                 <p>Solve the Problem.</p>
                     {difficulty === 'medium' ? (
@@ -131,14 +132,15 @@ const QPopUp = (props) => {
                         <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript" />
                     </Helmet>
                 </div>
-
             }
-            {difficulty === 'hard' && <div>
-                <button onClick={() => {
+            {difficulty === 'hard' && <div style = {{display:'flex', justifyContent:'center',alignItems:'center'}}>
+                <button id = "compiler-dynamic-button" onClick={() => {
                     setOpenCompiler(!openCompiler);
                 }}>{openCompiler ? "Close Compiler" : "Open Compiler"}</button></div>}
-            <div className='pop-up-code-block' id = {difficulty === 'medium' ? 'pop-up-code-block-img' : undefined}>
-                <textarea onChange={changeCode} name="code" id="code" style={{ width: difficulty === 'medium' ? '18em' : 'auto' }} rows={difficulty === 'medium' ? '15' : '2'} placeholder='Paste the code here to submit.'></textarea>
+            
+            <div className='pop-up-code-block' id = {difficulty === 'medium' ? 'pop-up-code-block-img' : undefined} >
+                <textarea onChange={changeCode} name="code" id="code" style={{ width: difficulty === 'medium' ? '18em' : (difficulty === "hard" && openCompiler) ? '30em' : 'auto' }} 
+                        rows={difficulty === 'medium' ? '15' : (difficulty === "hard" && openCompiler) ? '20' : '3'} placeholder='Paste the code here to submit.'></textarea>
                 <div className='pop-up-bottom-block'>
                     <button onClick={pushCode}>Submit</button>
                     <button onClick={() => {

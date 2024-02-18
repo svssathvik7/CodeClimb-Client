@@ -105,3 +105,26 @@
     margin-left: -50%;
     resize: none;
 }
+#pop-up-block-hard{
+    display: flex;
+    flex-direction: row;
+    width: 70rem;
+    justify-content: space-around;
+}
+#pop-up-block-hard .pop-up-code-block{
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+}
+#compiler-dynamic-button{
+    border: 3px solid #3F0D10;
+    padding: 0.5rem;
+}
+#pop-up-block-hard #compiler-dynamic-button{
+    position: absolute;
+    left: 70%;
+    bottom: 13%;
+}
+#pop-up-block-hard textarea{
+    resize: none;
+}
