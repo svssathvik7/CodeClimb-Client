@@ -3,9 +3,10 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import "./Dice.css"
 import { diceContextProvider } from '../../Contexts/DiceContext';
 import ReactDice, { ReactDiceRef } from 'react-dice-complete'
+import { pawnContextProvider } from '../../Contexts/PawnContext';
 export default function DiceObject() {
   // const reactDice = useRef(null);
-  const { diceRoll, setDiceRoll } = useContext(diceContextProvider);
+  const { updatePawnPosition } = useContext(pawnContextProvider);
   // const [select, setSelect] = useState(false);
   // const [disableButton, setDisableButton] = useState(true);
   // const rollDone = (totalValue, values) => {
@@ -22,9 +23,7 @@ export default function DiceObject() {
   // }, [diceRoll]);
   const updateDiceRoll = () => {
     const random = Math.floor(Math.random() * 6) + 1;
-    setDiceRoll((prev) => {
-      return { ...prev, value: random }
-    });
+    updatePawnPosition(random, 'dice-roll');
   }
   return <div id='dice-box' onClick={updateDiceRoll}>
     {/* <ReactDice
