@@ -37,7 +37,7 @@ const Block = (props) => {
     }
     useEffect(() => {
         changeBlock();
-        console.log(block);
+        // console.log(block);
     }, [pawn]);
     return (
         <div id={'block-id-names' + block.blockId} className={'block-head block-'+block?.isSnake?.difficulty}>

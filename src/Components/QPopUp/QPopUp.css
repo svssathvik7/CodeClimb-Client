@@ -8,10 +8,10 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 35em;
-    height: -moz-fit-content;
-    height: fit-content;
+    width: 60dvw;
+    height: 80dvh;
     padding: 15px;
+    z-index: 100000;
 }
 
 .pop-up-block>* {
@@ -24,7 +24,13 @@
     display: flex;
     flex-direction: column;
 }
-
+#question-image{
+    position: absolute;
+    top: 26%;
+    left: 47%;
+    width: 25rem;
+    height: 15rem;
+}
 .pop-up-question-block>* {
     padding: 10px 0px;
 }
@@ -108,8 +114,10 @@
 #pop-up-block-hard{
     display: flex;
     flex-direction: row;
+    gap: 1rem;
     width: 70rem;
     justify-content: space-around;
+    font-size: 1rem;
 }
 #pop-up-block-hard .pop-up-code-block{
     flex-direction: column;
