@@ -116,34 +116,34 @@ const QPopUp = (props) => {
     }, []);
     return (
         <div className='pop-up-block'>
-            <div className='pop-up-child'>
-                {!openCompiler && <div className='pop-up-question-block'>
-                    <p>{questionHeading}</p>
-                    <div className='question-block'>
-                        {question?.question}
-                    </div>
-                </div>}
-                {(difficulty === 'hard' && openCompiler === true) &&
-                    <div className='pop-up-compiler-block'>
-                        <div data-pym-src="https://www.jdoodle.com/a/7fRG"></div>
-                        <Helmet>
-                            <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript" />
-                        </Helmet>
-                    </div>
+            {!openCompiler && <div className='pop-up-question-block' >
+                <p>Solve the Problem.</p>
+                    {difficulty === 'medium' ? (
+                        <img id = ' question-image' src={`http://localhost:3001/${question?.question}`} alt="" />
+                        ) : (
+                        <div className='question-block'><p>{question?.question}</p></div>
+                    )}
+            </div>}
+            {(difficulty === 'hard' && openCompiler === true) &&
+                <div className='pop-up-compiler-block'>
+                    <div data-pym-src="https://www.jdoodle.com/a/7fRG"></div>
+                    <Helmet>
+                        <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript" />
+                    </Helmet>
+                </div>
 
-                }
-                {difficulty === 'hard' && <div>
+            }
+            {difficulty === 'hard' && <div>
+                <button onClick={() => {
+                    setOpenCompiler(!openCompiler);
+                }}>{openCompiler ? "Close Compiler" : "Open Compiler"}</button></div>}
+            <div className='pop-up-code-block' id = {difficulty === 'medium' ? 'pop-up-code-block-img' : undefined}>
+                <textarea onChange={changeCode} name="code" id="code" style={{ width: difficulty === 'medium' ? '18em' : 'auto' }} rows={difficulty === 'medium' ? '15' : '2'} placeholder='Paste the code here to submit.'></textarea>
+                <div className='pop-up-bottom-block'>
+                    <button onClick={pushCode}>Submit</button>
                     <button onClick={() => {
-                        setOpenCompiler(!openCompiler);
-                    }}>{openCompiler ? "Close Compiler" : "Open Compiler"}</button></div>}
-                <div className='pop-up-code-block'>
-                    <textarea onChange={changeCode} name="code" id="code" cols="30" rows="2" placeholder='Paste the code here to submit.'></textarea>
-                    <div className='pop-up-bottom-block'>
-                        <button onClick={pushCode}>Submit</button>
-                        <button onClick={() => {
-                            giveUp(from);
-                        }}>Give Up</button>
-                    </div>
+                        giveUp(from);
+                    }}>Give Up</button>
                 </div>
             </div>
         </div>
