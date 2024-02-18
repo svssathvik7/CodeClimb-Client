@@ -87,6 +87,10 @@ export default function MapPage() {
     <div className='map-page-container'>
       <div className='score-block'>
         <p>Score : {pawn.score}</p>
+        {guidelines && <Guidelines />}
+        <button className='leader-board-button' onClick={() => {
+          setShowBoard(!showBoard);
+        }}>{showBoard ? 'Close' : 'Show'} Leader Board</button>
       </div>
       <Timer />
       <Map setPawn={setPawn} updatePawn={updatePawn} pawn={pawn} />
@@ -95,10 +99,6 @@ export default function MapPage() {
       <IoIosInformationCircle className='guide-lines-button' onClick={() => {
         setGuideLines(!guidelines);
       }} />
-      {guidelines && <Guidelines />}
-      <button className='leader-board-button' onClick={() => {
-        setShowBoard(!showBoard);
-      }}>{showBoard ? 'Close' : 'Show'} Leader Board</button>
     </div>
   )
 }

@@ -8,24 +8,37 @@
     padding-left: 2em;
     align-items: center;
     justify-content: center;
+    padding-bottom: 10em;
 }
-.score-block {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 9999;
+.score-block{
+    position: absolute;
+    top: 0;left: 0;
+    margin: 2%;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
-
+.leader-board-button{
+    color: white;
+    font-weight: bold;
+    background-color: black;
+    padding: 1%;
+    transition: all 0.3s ease;
+}
+.leader-board-button:hover{
+    background-color: white;
+    font-weight: bold;
+    color: black;
+    padding: 1%;
+    transition: all 0.3s ease;
+}
 body {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.leader-board-button {
-    position: fixed;
-    top: 3rem;
-    left: 1rem;
 }
 
 .guide-lines-button {

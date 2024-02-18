@@ -23,7 +23,7 @@ export default function DiceObject() {
     </div>
     <div className='roll-value-holder'>
       <p id='dice-value'>{diceRoll}</p>
-      <p>Hagrid Number</p>
+      <p>Hagrid's Number</p>
     </div>
   </div>)
 }
