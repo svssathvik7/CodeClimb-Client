@@ -9,6 +9,8 @@
 .snakes-gif{
     mix-blend-mode: darken;
     z-index: 5000!important;
+    width: 8dvw;
+    position: absolute;
 }
 .block-number {
     z-index: 100;
@@ -17,7 +19,15 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
-
+.block-easy{
+    box-shadow: inset 4px 4px 32px rgb(23, 229, 23);
+}
+.block-medium{
+    box-shadow: inset 4px 4px 32px #f4c406;
+}
+.block-hard{
+    box-shadow: inset 4px 4px 32px red;
+}
 .block-head {
     width: 8dvw;
     height: 8dvw;
@@ -35,85 +45,17 @@
 
 .block-head img {
     position: absolute;
-    left: 50%;
-    z-index: 5000!important;
+    z-index: 4000!important;
     pointer-events: none;
 }
-
-.snake-id-26 {
-    transform: scaleX(-1.4) translate(370px,130px);
-}
-
-.snake-id-13 {
-    transform: translate(-340px,80px) scale(0.6);
-}
-
-.snake-id-55 {
-    transform: translate(-330px, 120px);
-}
-
-.snake-id-91 {
-    transform: rotate(120deg) translate(300px,30px);
-}
-
-.snake-id-75 {
-    transform: translate(-160px,10px) scale(0.5);
-}
-
-.snake-id-98 {
-    transform: translate(-160px,0px) scale(0.5);
-}
-
-.snake-id-62 {
-    transform: rotate(135deg) translate(340px,-20px);
-}
-
-.snake-id-44 {
-    transform: translate(-460px,130px) scaleX(-0.8);
-}
-.snake-id-85{
-    transform: translate(-460px,120px) scaleX(-0.8) scaleY(1);
+.ladders{
+    left: 50%;
 }
 .block-id-16 {
     width: 5dvw;
     height: 20em;
     transform: translate(200%, -17%) rotate(68deg);
     display: none;
-}
-#block-id-names98{
-    box-shadow: inset 4px 4px 32px red;
-}
-
-#block-id-names75{
-    box-shadow: inset 4px 4px 32px red;
-}
-
-
-#block-id-names62{
-    box-shadow: inset 4px 4px 32px yellow;
-}
-
-#block-id-names91{
-    box-shadow: inset 4px 4px 32px yellow;
-}
-
-#block-id-names85{
-    box-shadow: inset 4px 4px 32px green;
-}
-
-#block-id-names55{
-    box-shadow: inset 4px 4px 32px green;
-}
-
-#block-id-names44{
-    box-shadow: inset 4px 4px 32px green;
-}
-
-#block-id-names26{
-    box-shadow: inset 4px 4px 32px green;
-}
-#block-id-names13{
-    box-shadow: inset 4px 4px 32px green;
 }
 .block-id-19,
 .block-id-30,

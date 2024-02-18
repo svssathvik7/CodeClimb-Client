@@ -1,13 +1,11 @@
-import s1 from '../Assets/snake.gif';
-import s2 from '../Assets/snake2.gif';
-import s3 from '../Assets/snake3.gif';
+import s1 from '../Assets/snake3.gif';
 const snakes = {
     98: {
         snakeId: "sn1",
         start: 98,
         end: 3,
         difficulty: "hard",
-        snake: s3,
+        snake: s1,
         questionId: "#",
         title: "You will be going to block 3"
     },
@@ -16,7 +14,7 @@ const snakes = {
         start: 91,
         end: 51,
         difficulty: "medium",
-        snake: s2,
+        snake: s1,
         questionId: "#"
     },
     75: {
@@ -24,7 +22,7 @@ const snakes = {
         start: 75,
         end: 10,
         difficulty: "hard",
-        snake: s3,
+        snake: s1,
         questionId: "#",
         title: "You will be going to block 10"
     },
@@ -33,7 +31,7 @@ const snakes = {
         start: 62,
         end: 21,
         difficulty: "medium",
-        snake: s2,
+        snake: s1,
         questionId: "#"
     },
     55: {
@@ -76,6 +74,24 @@ const snakes = {
         snake: s1,
         questionId: "#"
     },
+    32: {
+        snakeId: "sn10",
+        start: 32,
+        end: 1,
+        difficulty: "hard",
+        snake: s1,
+        questionId: "#",
+        title: "You will be going to block 1"
+    },
+    51: {
+        snakeId: "sn11",
+        start: 51,
+        end: 24,
+        difficulty: "medium",
+        snake: s1,
+        questionId: "#",
+    }
+    
 };
 const ladders = {
     74: {

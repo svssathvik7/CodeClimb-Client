@@ -38,11 +38,12 @@ const Block = (props) => {
     }
     useEffect(() => {
         changeBlock();
+        console.log(block);
     }, [pawn]);
     return (
-        <div id={'block-id-names' + block.blockId} className='block-head'>
+        <div id={'block-id-names' + block.blockId} className={'block-head block-'+block?.isSnake?.difficulty}>
             {block.isSnake && <img title={block?.title} className={'snake-id-' + block.isSnake.start + " snakes-gif"} src={block.isSnake.snake} alt='snake'></img>}
-            {block.isLadder && <img className={'block-id-' + block.blockId} src={ladder} alt='ladder'></img>}
+            {block.isLadder && <img className={'block-id-' + block.blockId + " ladders"} src={ladder} alt='ladder'></img>}
             {block.isPawn ? <Pawn pawn={pawn} /> : <p className='block-number'>{block.blockId}</p>}
             {(block.isPawn && block.isSnake) ? <QPopUp pawn={pawn} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isSnake.difficulty} from='snake' giveUp={giveUp} /> : null}
             {(block.isPawn && block.isLadder) ? <QPopUp pawn={pawn} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isLadder.difficulty} from='ladder' giveUp={giveUp} /> : null}
