@@ -1,21 +1,56 @@
 #dice-box {
+    width: 40dvw;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 1%;
-    cursor: pointer;
-    height: 100dvh;
-    position: fixed;
-    top: 50%;
-    transform: translate(0, -50%);
-    right: 0;
-    width: 2em;
-    height: 2em;
+    justify-content: space-around;
     background-color: black;
+    height: fit-content;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 1% auto;
+    z-index: 3000;
+    padding: 2%;
+    border-radius: 1rem;
+    border: thick solid #fff;
 }
 
-.dice {
-    pointer-events: none !important;
-    cursor: crosshair;
+#hagrid{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+#hagrid-btn{
+    padding: 1%;
+    border-radius: 1rem;
+    background-color: yellow;
+    transition: all 0.3s ease;
+}
+#hagrid-btn:hover{
+    padding: 1%;
+    border-radius: 1rem;
+    color: yellow;
+    background-color: black;
+}
+#hagrid img{
+    width: 4dvw;
+}
+#dice-value{
+    color: black;
+    width: 3dvw;
+    height: 3dvw; 
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+}
+.roll-value-holder{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    color: white;
+    flex-direction: column;
 }

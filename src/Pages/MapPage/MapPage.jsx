@@ -79,8 +79,8 @@ export default function MapPage() {
     getPosition();
   }, []);
   useEffect(() => {
-    if (diceRoll.value !== 0) {
-      updatePawn(diceRoll.value, 'dice-roll');
+    if (diceRoll !== 0) {
+      updatePawn(diceRoll, 'dice-roll');
     }
   }, [diceRoll]);
   return (

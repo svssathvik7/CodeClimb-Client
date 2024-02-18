@@ -3,10 +3,7 @@ import React, { createContext, useState } from 'react'
 export const diceContextProvider = createContext(null);
 
 const DiceContext = ({ children }) => {
-    const [diceRoll, setDiceRoll] = useState({
-        value: 0,
-        state: false
-    });
+    const [diceRoll, setDiceRoll] = useState(0);
     return (
         <diceContextProvider.Provider value={{ diceRoll, setDiceRoll }}>
             {children}
