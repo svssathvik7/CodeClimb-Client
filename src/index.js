@@ -7,13 +7,13 @@ import UserContext from './Contexts/UserContext';
 import LeaderBoardContext from './Contexts/LeaderBoardContext';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <UserContext>
+  // <React.StrictMode>
+  <BrowserRouter>
+    <UserContext>
       <LeaderBoardContext>
-      <App />
+        <App />
       </LeaderBoardContext>
-      </UserContext>
-    </BrowserRouter>
-  </React.StrictMode>
+    </UserContext>
+  </BrowserRouter>
+  // </React.StrictMode>
 );

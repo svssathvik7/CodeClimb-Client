@@ -3,12 +3,12 @@ import Block from './Block';
 import './RBP.css';
 
 const Row = (props) => {
-    const { rowId, pawn, updatePawn, setPawn } = props;
+    const { rowId } = props;
     const rowConstants = [...Array(10).keys()];
     return (
         <div className='row-head'>
             {rowConstants.map((key, ind) => {
-                return <Block setPawn={setPawn} updatePawn={updatePawn} pawn={pawn} key={key} blockId={(rowId - 1) * 10 + ind + 1} />
+                return <Block key={key} blockId={(rowId - 1) * 10 + ind + 1} />
             })}
         </div>
     )

@@ -101,10 +101,10 @@ const ladders = {
         difficulty: "medium",
         questionId: "#"
     },
-    65: {
+    37: {
         ladderId: "ld2",
-        start: 65,
-        end: 90,
+        start: 37,
+        end: 67,
         difficulty: "medium",
         questionId: "#"
     },

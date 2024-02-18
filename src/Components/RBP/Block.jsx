@@ -4,9 +4,10 @@ import QPopUp from '../QPopUp/QPopUp.jsx';
 import ladder from '../../Assets/Ladder1.png';
 import './RBP.css';
 import Pawn from './Pawn';
-import { diceContextProvider } from '../../Contexts/DiceContext.jsx';
+import { pawnContextProvider } from '../../Contexts/PawnContext.jsx';
 const Block = (props) => {
-    const { blockId, pawn, updatePawn, setPawn } = props;
+    const { blockId } = props;
+    const { pawn, setPawn, updatePawnPosition } = useContext(pawnContextProvider);
     const [block, setBlock] = useState({
         isPawn: blockId === pawn.blockId ? true : false,
         blockId: blockId,
@@ -25,16 +26,14 @@ const Block = (props) => {
             return { ...prev, isPawn: false }
         });
         const value = from === 'snake' ? block.isSnake.start + 1 : block.isLadder.end;
-        console.log(value);
-        updatePawn(value, 'ladder-or-snake');
+        updatePawnPosition(value, 'ladder-or-snake');
     }
     const giveUp = (from) => {
         setBlock((prev) => {
             return { ...prev, isPawn: false }
         });
         const value = from === 'snake' ? block.isSnake.end : block.isLadder.start + 1;
-        console.log(value);
-        updatePawn(value, 'ladder-or-snake');
+        updatePawnPosition(value, 'ladder-or-snake');
     }
     useEffect(() => {
         changeBlock();
