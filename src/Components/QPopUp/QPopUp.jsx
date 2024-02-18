@@ -4,18 +4,12 @@ import './QPopUp.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { userContextProvider } from '../../Contexts/UserContext';
-import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
-import { diceContextProvider } from '../../Contexts/DiceContext';
 const QPopUp = (props) => {
-    const { formData } = useContext(loginDataContextProvider);
-    const regNo = formData.username;
-    const { giveUp, from, difficulty, pawn, setPawn, changePositionOnSuccess } = props;
+    const { giveUp, from, difficulty, regNo, pawn, setPawn } = props;
     const [code, setCode] = useState(``);
     const [openCompiler, setOpenCompiler] = useState(false);
     const { user } = useContext(userContextProvider);
-    const { setDiceRoll } = useContext(diceContextProvider);
     const [question, setQuestion] = useState();
-    const [questionHeading, setQuestionHeading] = useState();
     const changeCode = (e) => {
         const { value } = e.target;
         setCode(value);
@@ -33,7 +27,6 @@ const QPopUp = (props) => {
             });
             const data = response.data;
             if (data.status) {
-                changePositionOnSuccess(from);
                 toast.success(`${data.message}!`, {
                     position: "top-right",
                     autoClose: 5000,
@@ -46,7 +39,6 @@ const QPopUp = (props) => {
                 });
             }
             else {
-                giveUp(from);
                 toast.error("Code failed!", {
                     position: "top-right",
                     autoClose: 5000,
@@ -82,7 +74,6 @@ const QPopUp = (props) => {
                 else {
                     fetchQuestion(difficulty);
                 }
-                console.log(data);
             }
             else {
                 console.log(data.message);
@@ -92,20 +83,8 @@ const QPopUp = (props) => {
             console.log('Error Occured');
         }
     }
-    const changeQuestionHeading = (difficulty) => {
-        if (difficulty === 'easy') {
-            setQuestionHeading("Correct the syntax and rewrite the code in the box below:");
-        }
-        else if (difficulty === 'medium') {
-            setQuestionHeading("Fill the missing Code to get the desired output:");
-        }
-        else {
-            setQuestionHeading('Solve the problem:');
-        }
-    }
     useState(() => {
         fetchQuestion(difficulty);
-        changeQuestionHeading(difficulty);
         if (pawn?.questions?.easy?.length === 10) {
             reset('easy');
         }
@@ -115,18 +94,17 @@ const QPopUp = (props) => {
         if (pawn?.questions?.hard?.length === 7) {
             reset('hard');
         }
-        setDiceRoll((prev) => {
-            return { ...prev, state: true }
-        });
-
-    }, [formData]);
+    }, []);
+    console.log(question);
     return (
         <div className='pop-up-block'>
-            {!openCompiler && <div className='pop-up-question-block'>
-                <p>{questionHeading}</p>
-                <div className='question-block'>
-                    {question?.question}
-                </div>
+            {!openCompiler && <div className='pop-up-question-block' >
+                <p>Solve the Problem.</p>
+                    {difficulty === 'medium' ? (
+                        <img id = ' question-image' src={`http://localhost:3001/${question?.question}`} alt="" />
+                        ) : (
+                        <div className='question-block'><p>{question?.question}</p></div>
+                    )}
             </div>}
             {(difficulty === 'hard' && openCompiler === true) &&
                 <div className='pop-up-compiler-block'>
@@ -141,8 +119,8 @@ const QPopUp = (props) => {
                 <button onClick={() => {
                     setOpenCompiler(!openCompiler);
                 }}>{openCompiler ? "Close Compiler" : "Open Compiler"}</button></div>}
-            <div className='pop-up-code-block'>
-                <textarea onChange={changeCode} name="code" id="code" cols="30" rows="2" placeholder='Paste the code here to submit.'></textarea>
+            <div className='pop-up-code-block' id = {difficulty === 'medium' ? 'pop-up-code-block-img' : undefined}>
+                <textarea onChange={changeCode} name="code" id="code" style={{ width: difficulty === 'medium' ? '18em' : 'auto' }} rows={difficulty === 'medium' ? '15' : '2'} placeholder='Paste the code here to submit.'></textarea>
                 <div className='pop-up-bottom-block'>
                     <button onClick={pushCode}>Submit</button>
                     <button onClick={() => {
