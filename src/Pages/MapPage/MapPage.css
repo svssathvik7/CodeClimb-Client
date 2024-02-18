@@ -24,13 +24,6 @@
     flex-direction: column;
 }
 
-.leader-board-button {
-    color: white;
-    font-weight: bold;
-    background-color: black;
-    padding: 1%;
-    transition: all 0.3s ease;
-}
 
 .leader-board-button:hover {
     background-color: white;
@@ -64,9 +57,15 @@ body {
 }
 
 .leader-board-button {
-    position: fixed;
-    top: 3rem;
-    left: 1rem;
+    position: absolute;
+    top: 2rem;
+    left: 0rem;
+    color: white;
+    font-weight: bold;
+    background-color: black;
+    padding: 5%;
+    transition: all 0.3s ease;
+    width: 12em;
 }
 
 .guide-lines-button {
