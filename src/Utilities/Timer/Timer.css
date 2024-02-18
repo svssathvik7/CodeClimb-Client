@@ -4,8 +4,16 @@
     right: 1rem;
     padding: 0.5rem;
     width: fit-content;
+    height: -moz-fit-content;
     height: fit-content;
     position: fixed;
     border: 3px solid #3F0D10;
     background-color: #EAD196;
+    z-index: 9999;
+    font-weight: bold;
+    text-align: center;
+}
+
+#timer-ui {
+    width: 5dvw;
 }

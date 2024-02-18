@@ -6,13 +6,31 @@
     padding: 5em 0em;
     background-color: #D7A357;
     padding-left: 2em;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10em;
 }
 
 .score-block {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    z-index: 9999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 2%;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.leader-board-button:hover {
+    background-color: white;
+    font-weight: bold;
+    color: black;
+    padding: 1%;
+    transition: all 0.3s ease;
 }
 
 body {
@@ -21,10 +39,33 @@ body {
     justify-content: center;
 }
 
-.leader-board-button {
+.game-over-block {
+    width: 100dvw;
+    height: 100dvh;
     position: fixed;
-    top: 3rem;
-    left: 1rem;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../../Assets/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 9999;
+    font-size: 4em;
+    color: white;
+}
+
+.leader-board-button {
+    position: absolute;
+    top: 2rem;
+    left: 0rem;
+    color: white;
+    font-weight: bold;
+    background-color: black;
+    padding: 5%;
+    transition: all 0.3s ease;
+    width: 12em;
 }
 
 .guide-lines-button {

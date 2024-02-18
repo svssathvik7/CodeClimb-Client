@@ -6,14 +6,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import MapPage from './Pages/MapPage/MapPage';
 import DiceContext from './Contexts/DiceContext';
 import LoginDataContext from './Contexts/LoginDataContext';
+import PawnContext from './Contexts/PawnContext';
 function App() {
   return (
     <div>
       <LoginDataContext>
-        <Routes>
-          <Route exact path="/" Component={Login} />
-          <Route exact path='/map' element={<DiceContext><MapPage /></DiceContext>} />
-        </Routes>
+        <PawnContext>
+          <Routes>
+            <Route exact path="/" Component={Login} />
+            <Route exact path='/map' element={<DiceContext><MapPage /></DiceContext>} />
+          </Routes>
+        </PawnContext>
       </LoginDataContext>
       <ToastContainer
         position="top-right"
