@@ -56,6 +56,7 @@ export default function MapPage() {
   const updatePawn = async (value, from) => {
     const response = await axios.post('http://localhost:3001/api/user/metrics/updatePosition', { diceRoll: value, regNo: regNo, from: from });
     const data = response.data;
+    console.log(data)
     if (data.status) {
       setPawn((prev) => {
         return { ...prev, blockId: data.newPosition, score: data.score }
