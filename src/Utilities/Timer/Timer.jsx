@@ -1,35 +1,56 @@
-import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import "./Timer.css";
-const Timer = (props) => {
-  const EndTime = new Date("2024-02-21T15:00:00");
-  const initialTime = Math.floor((EndTime - new Date()) / 1000);
-  const [time, setTime] = useState(initialTime);
-  if (time > 3600) {
-    setTime(3600);
-  }
-  const [formattedTime, setFormattedTime] = useState('60:00');
+import Countdown from 'react-countdown';
 
+const Timer = () => {
+  const [endTime, setEndTime] = useState(null);
   useEffect(() => {
-    if (time > 0) {
-      const timer = setInterval(() => {
-        setTime(prevTime => prevTime - 1);
-      }, 1000);
-
-      return () => clearInterval(timer);
-    }
-  }, [time]);
-
-  useEffect(() => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    const formattedMinutes = String(minutes).padStart(2, '0');
-    const formattedSeconds = String(seconds).padStart(2, '0');
-    setFormattedTime(`${formattedMinutes}:${formattedSeconds}`);
-  }, [time]);
-
+    const getTime = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/api/user/metrics/get-contest-time");
+        if (response.data.status) {
+          const time = Date.parse(response.data.startTime);
+          setEndTime(time);
+          console.log(endTime - Date.now())
+        } else {
+          toast.error("Failed to fetch contest start time from the server", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching contest start time:", error);
+        toast.error("Failed to fetch contest start time from the server", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+    };
+    getTime();
+  }, [endTime]);
+  const renderer = ({ hours, minutes, seconds, completed }) => {
+    console.log(seconds);
+      return <span>{hours}:{minutes}:{seconds}</span>;
+  };
   return (
-    <div className="timer-block">
-      <div id="timer">{formattedTime}</div>
+    <div id='timer'>
+      <div id='timer-ui'>
+        {endTime && <Countdown date={(endTime)} renderer={renderer} intervalDelay={1000}/>}
+      </div>
     </div>
   );
 };

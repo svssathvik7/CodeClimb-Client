@@ -1,12 +1,19 @@
 #timer {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0;
+    right: 0;
+    margin: 2%;
     border: 1px solid black;
-    padding: 0.5rem;
+    padding: 1%;
     width: fit-content;
     height: fit-content;
     position: fixed;
     border: 3px solid #3F0D10;
     background-color: #EAD196;
+    z-index: 1500;
+    font-weight: bold;
+    text-align: center;
+}
+#timer-ui{
+    width: 5dvw;
 }
