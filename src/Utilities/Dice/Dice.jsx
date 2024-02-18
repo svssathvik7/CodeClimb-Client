@@ -3,7 +3,9 @@ import "./Dice.css"
 import Hagrid from "../../Assets/hagrid.png";
 import { diceContextProvider } from '../../Contexts/DiceContext';
 import { pawnContextProvider } from '../../Contexts/PawnContext';
+import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 export default function DiceObject() {
+  const { gameUp } = useContext(loginDataContextProvider);
   const { diceRoll, setDiceRoll } = useContext(diceContextProvider);
   const { updatePawnPosition } = useContext(pawnContextProvider);
   const [enableDice, setEnableDice] = useState(true);
@@ -22,7 +24,7 @@ export default function DiceObject() {
     <div id='dice-box'>
       <div id='hagrid'>
         <img alt='hagrid' src={Hagrid} />
-        <button disabled={!enableDice} id='hagrid-btn' onClick={updateDiceRoll}>Ask Hagrid a number!</button>
+        <button disabled={(!enableDice) && (!gameUp)} id='hagrid-btn' onClick={updateDiceRoll}>Ask Hagrid a number!</button>
       </div>
       <div className='roll-value-holder'>
         <p id='dice-value'>{diceRoll}</p>

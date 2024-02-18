@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import "./Timer.css";
 import Countdown from 'react-countdown';
-
+import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 const Timer = () => {
+  const {setGameUp} = useContext(loginDataContextProvider);
   const [endTime, setEndTime] = useState(null);
   useEffect(() => {
     const getTime = async () => {
@@ -13,7 +14,6 @@ const Timer = () => {
         if (response.data.status) {
           const time = Date.parse(response.data.startTime);
           setEndTime(time);
-          console.log(endTime - Date.now())
         } else {
           toast.error("Failed to fetch contest start time from the server", {
             position: "top-right",
@@ -43,8 +43,13 @@ const Timer = () => {
     getTime();
   }, [endTime]);
   const renderer = ({ hours, minutes, seconds, completed }) => {
-    console.log(seconds);
+    if(completed)
+    {
+      setGameUp(true);
+    }
+    else{
       return <span>{hours}:{minutes}:{seconds}</span>;
+    }
   };
   return (
     <div id='timer'>
