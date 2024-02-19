@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet';
 import './QPopUp.css';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { userContextProvider } from '../../Contexts/UserContext';
 import { motion } from "framer-motion";
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 import { pawnContextProvider } from '../../Contexts/PawnContext';
+import { socketContextProvider } from '../../Contexts/SocketContext';
+import axios from 'axios';
 const QPopUp = (props) => {
     const { formData } = useContext(loginDataContextProvider);
     const { pawn } = useContext(pawnContextProvider);
@@ -25,7 +26,7 @@ const QPopUp = (props) => {
         try {
             // replace hard values with qId and etc after frontend
             const submissionId = await user + new Date().getTime();
-            const response = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/codes/run-code", {
+            const response = await axios.post('http://localhost:3001/api/codes/run-code', {
                 code: code,
                 submissionId: submissionId,
                 qId: question.qId,
@@ -37,16 +38,6 @@ const QPopUp = (props) => {
             }
             else {
                 giveUp(from);
-                toast.error("Code failed!", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
             }
         }
         catch (err) {
@@ -55,7 +46,7 @@ const QPopUp = (props) => {
     }
     const fetchQuestion = async (difficulty) => {
         try {
-            const response = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/details/getQuestion", { difficulty: difficulty, regNo: regNo });
+            const response = await axios.post('http://localhost:3001/api/details/getQuestion', { difficulty: difficulty, regNo: regNo });
             const data = response.data;
             if (data.status === true) {
                 setQuestion(data.question);
@@ -82,7 +73,7 @@ const QPopUp = (props) => {
     useState(() => {
         changeQuestionHeading(difficulty);
         fetchQuestion(difficulty);
-        toast.info(`You are at position : ${currPosition} and there is a ${from} here`, {
+        toast.info(`You are at position : ${currPosition} and there is a ${from} over here`, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,

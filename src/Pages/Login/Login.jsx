@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react'
 import "./Login.css";
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
+import { socketContextProvider } from '../../Contexts/SocketContext';
 export default function Login() {
+    const { socket } = useContext(socketContextProvider);
     const navigate = useNavigate();
     const { formData, setFormData } = useContext(loginDataContextProvider);
     const handleFormChange = (e) => {
@@ -14,39 +15,27 @@ export default function Login() {
     }
     const handleFormSubmit = async () => {
         try {
-            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+"/api/user/login",
-                {
-                    regNo: formData.username,
-                    password: formData.password
-                });
-            const data = response.data;
-            if (data.status === false) {
-                toast.error("Login failed!", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-            }
-            else {
-                toast.success("Log in success!", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-                const regNo = formData?.username;
-                localStorage.setItem('user', regNo);
-                navigate('/map');
-            }
+            socket.emit('login', { regNo: formData.username, password: formData.password });
+
+            socket.on('login-result', async (data) => {
+                if (data !== false) {
+                    const regNo = formData?.username;
+                    localStorage.setItem('user', regNo);
+                    navigate('/map');
+                }
+                else {
+                    toast.error("Login failed!", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+                }
+            });
         } catch (error) {
             toast.error("Login failed!", {
                 position: "top-right",

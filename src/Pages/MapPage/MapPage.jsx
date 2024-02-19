@@ -7,32 +7,47 @@ import LeaderBoard from '../../Components/Leaderboard/LeaderBoard';
 import { leaderBoardContextProvider } from '../../Contexts/LeaderBoardContext';
 import { IoIosInformationCircle } from "react-icons/io";
 import Guidelines from '../../Components/Guidelines/Guidelines';
-import axios from 'axios';
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 import { pawnContextProvider } from '../../Contexts/PawnContext';
 import GameOver from '../GameOver/GameOver';
 import { toast } from 'react-toastify';
+import { socketContextProvider } from '../../Contexts/SocketContext';
 export default function MapPage() {
+  const { socket } = useContext(socketContextProvider);
   const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
   const { pawn, getPawnDetails } = useContext(pawnContextProvider);
   const [guidelines, setGuideLines] = useState(false);
   const { formData, setGameUp } = useContext(loginDataContextProvider);
   const setScoreToZero = async () => {
     try {
-      const response = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/user/metrics/set-score-zero", { regNo: formData.username });
-      const data = response.data;
-      if (data.status) {
-        getPawnDetails();
-      }
-      toast.info(data.message, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
+      socket.emit('set-score-zero', { regNo: formData.username });
+
+      socket.on('on-set-score-zero', async (data) => {
+        if (data !== false) {
+          getPawnDetails();
+          toast.info("Reset successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
+        else {
+          toast.error('Error occured!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        }
       });
     }
     catch (err) {
