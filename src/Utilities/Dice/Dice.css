@@ -87,7 +87,7 @@
 }
 #roll-history-btn:active{
     transform: scale(0.9);
-
+}
 .active{
     cursor: wait;
     opacity: 0.2;

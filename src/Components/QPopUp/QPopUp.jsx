@@ -139,18 +139,6 @@ const QPopUp = (props) => {
                     <p>{questionHeading}</p>
                     {difficulty !== 'medium' && <div className='question-block'><p>{question?.question}</p></div>}
                 </div>
-<<<<<<< HEAD
-            }
-            
-            <div className='pop-up-code-block' id = {difficulty === 'medium' ? 'pop-up-code-block-img' : undefined} >
-                <textarea onChange={changeCode} name="code" id="code" style={{ width: difficulty === 'medium' ? '18em' : (difficulty === "hard" ) ? '20em' : '40rem' }} 
-                        rows={difficulty === 'medium' ? '15' : (difficulty === "hard") ? '15' : '15'} placeholder='Paste the code here to submit.'></textarea>
-                <div className='pop-up-bottom-block'>
-                    <button onClick={pushCode} disabled = {loading}>Submit</button>
-                    <button onClick={() => {
-                        giveUp(from);
-                    }}>Give Up</button>
-=======
                 <div className='pop-up-code-block' >
                     <div className='pop-up-code-dynamics'>
                         {(difficulty === 'medium') && <img className='medium-question-image' src={`http://localhost:3001/${question?.question}`} alt="" />}
@@ -170,7 +158,6 @@ const QPopUp = (props) => {
                             giveUp(from);
                         }}>Give Up</button>
                     </div>
->>>>>>> f5605febfa9acfc3374dd2395bb3f10dd1974ed7
                 </div>
             </div>
         </motion.div >
