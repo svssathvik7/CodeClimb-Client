@@ -31,7 +31,7 @@ export default function DiceObject() {
     setEnableDice(false);
     setTimeout(() => {
       setEnableDice(true);
-    }, 1300);
+    }, 2000);
 
     const random = Math.floor(Math.random() * 6) + 1;
     setDiceRoll(random);
@@ -50,7 +50,7 @@ export default function DiceObject() {
     <div id='dice-box'>
       <div id='hagrid'>
         <img alt='hagrid' src={Hagrid} />
-        <button disabled={(!enableDice) && (!gameUp)} id='hagrid-btn' onClick={updateDiceRoll}>
+        <button className={`${!enableDice ? " active " : ""}`} disabled={(!enableDice) && (!gameUp)} id='hagrid-btn' onClick={updateDiceRoll}>
           Ask Hagrid a number!
         </button>
       </div>

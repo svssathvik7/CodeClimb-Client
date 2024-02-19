@@ -28,6 +28,7 @@
     border-radius: 1rem;
     background-color: yellow;
     transition: all 0.3s ease;
+    font-weight: bold;
 }
 
 #hagrid-btn:hover {
@@ -42,14 +43,15 @@
 }
 
 #dice-value {
-    color: black;
+    color: white;
     width: 3dvw;
     height: 3dvw;
-    background-color: white;
+    border: thin solid #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bolder;
+    margin: 2%;
 }
 
 .roll-value-holder {
@@ -85,4 +87,8 @@
 }
 #roll-history-btn:active{
     transform: scale(0.9);
+
+.active{
+    cursor: wait;
+    opacity: 0.2;
 }
