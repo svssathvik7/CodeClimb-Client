@@ -30,13 +30,14 @@ export default function DiceObject() {
       console.log('Dice Rolls History:', newHistory);
       return newHistory;
     });
+    console.log(gameUp)
   }, [diceRoll]);
 
   return (
-    <div id='dice-box'>
+    (gameUp && <div id='dice-box'>
       <div id='hagrid'>
         <img alt='hagrid' src={Hagrid} />
-        <button disabled={(!enableDice) && (!gameUp)} id='hagrid-btn' onClick={updateDiceRoll}>
+        <button disabled={(!enableDice)} id='hagrid-btn' onClick={updateDiceRoll}>
           Ask Hagrid a number!
         </button>
       </div>
@@ -44,6 +45,6 @@ export default function DiceObject() {
         <p id='dice-value'>{diceRoll}</p>
         <p>Hagrid's Number</p>
       </div>
-    </div>
+    </div>)
   );
 }
