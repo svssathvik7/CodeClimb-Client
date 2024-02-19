@@ -5,6 +5,7 @@ import ladder from '../../Assets/Ladder1.png';
 import './RBP.css';
 import Pawn from './Pawn';
 import { pawnContextProvider } from '../../Contexts/PawnContext.jsx';
+import { toast } from 'react-toastify';
 const Block = (props) => {
     const { blockId } = props;
     const { pawn, setPawn, updatePawnPosition } = useContext(pawnContextProvider);
@@ -26,6 +27,17 @@ const Block = (props) => {
             return { ...prev, isPawn: false }
         });
         const value = from === 'snake' ? block.isSnake.start + 1 : block.isLadder.end;
+        const message = from === 'snake' ? `Hurray! You successfully avoided the snake bite at ${block.isSnake.start}. You've been moved to the next block` : `Congratulations! You've successfully solved the question for the ladder ${block.isLadder.start}. You've been moved to ${block.isLadder.end}`
+        toast.success(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
         updatePawnPosition(value, 'ladder-or-snake');
     }
     const giveUp = (from) => {
@@ -33,19 +45,29 @@ const Block = (props) => {
             return { ...prev, isPawn: false }
         });
         const value = from === 'snake' ? block.isSnake.end : block.isLadder.start + 1;
+        const message = from === 'snake' ? `Oh no! The snake at position ${block.isSnake.start} has bitten you! You've been moved to ${block.isSnake.end}` : `Oops! You didn't solve the question for the ladder ${block.isLadder.start}. You've been moved to the next block.`;
+        toast.info(message, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
         updatePawnPosition(value, 'ladder-or-snake');
     }
     useEffect(() => {
         changeBlock();
-        // console.log(block);
     }, [pawn]);
     return (
-        <div id={'block-id-names' + block.blockId} className={'block-head block-'+block?.isSnake?.difficulty}>
-            {block.isSnake && <img title={block?.title} className={'snake-id-' + block.isSnake.start + " snakes-gif"} src={block.isSnake.snake} alt='snake'></img>}
-            {block.isLadder && <img className={'block-id-' + block.blockId + " ladders"} src={ladder} alt='ladder'></img>}
+        <div id={'block-id-names' + block.blockId} className={'block-head block-' + block?.isSnake?.difficulty}>
+            {block.isSnake && <img title={block?.title} className={'snake snake-id-' + block.isSnake.start + " snakes-gif"} src={block.isSnake.snake} alt='snake'></img>}
+            {block.isLadder && <img className={'ladder block-id-' + block.blockId + " ladders"} src={ladder} alt='ladder'></img>}
             {block.isPawn ? <Pawn pawn={pawn} /> : <p className='block-number'>{block.blockId}</p>}
-            {(block.isPawn && block.isSnake) ? <QPopUp pawn={pawn} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isSnake.difficulty} from='snake' giveUp={giveUp} /> : null}
-            {(block.isPawn && block.isLadder) ? <QPopUp pawn={pawn} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isLadder.difficulty} from='ladder' giveUp={giveUp} /> : null}
+            {(block.isPawn && block.isSnake) ? <QPopUp pawn={pawn} currPosition={block.blockId} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isSnake.difficulty} from='snake' giveUp={giveUp} /> : null}
+            {(block.isPawn && block.isLadder) ? <QPopUp pawn={pawn} currPosition={block.blockId} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isLadder.difficulty} from='ladder' giveUp={giveUp} /> : null}
         </div>
     )
 }

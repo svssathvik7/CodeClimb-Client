@@ -85,7 +85,6 @@ const PawnContext = ({ children }) => {
             }
         }
     }
-    console.log(pawn);
     useEffect(() => {
         getPawnDetails();
     }, []);

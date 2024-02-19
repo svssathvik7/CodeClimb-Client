@@ -4,13 +4,14 @@ import './QPopUp.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { userContextProvider } from '../../Contexts/UserContext';
+import { motion } from "framer-motion";
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 import { pawnContextProvider } from '../../Contexts/PawnContext';
 const QPopUp = (props) => {
     const { formData } = useContext(loginDataContextProvider);
     const { pawn } = useContext(pawnContextProvider);
     const regNo = formData.username;
-    const { giveUp, from, difficulty, changePositionOnSuccess } = props;
+    const { giveUp, from, difficulty, changePositionOnSuccess, currPosition } = props;
     const [code, setCode] = useState(``);
     const { user } = useContext(userContextProvider);
     const [question, setQuestion] = useState();
@@ -24,7 +25,7 @@ const QPopUp = (props) => {
         try {
             // replace hard values with qId and etc after frontend
             const submissionId = await user + new Date().getTime();
-            
+
             const response = await axios.post('http://localhost:3001/api/codes/run-code', {
                 code: code,
                 submissionId: submissionId,
@@ -34,16 +35,6 @@ const QPopUp = (props) => {
             const data = response.data;
             if (data.status) {
                 changePositionOnSuccess(from);
-                toast.success(`${data.message}!`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
             }
             else {
                 giveUp(from);
@@ -92,37 +83,51 @@ const QPopUp = (props) => {
     useState(() => {
         changeQuestionHeading(difficulty);
         fetchQuestion(difficulty);
+        toast.info(`You are at position : ${currPosition} and there is a ${from} here`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
     }, []);
     return (
-        <div className='pop-up-block' id = {difficulty === 'hard' ? 'pop-up-block-hard' : 'undefined'}>
-            <div className='pop-up-question-block' >
-                <p>{questionHeading}</p>
-                {difficulty === 'medium' ? (
-                    <div><img id='question-image' src={`http://localhost:3001/${question?.question}`} alt="" /></div>
-                ) : (
-                    <div className='question-block'><p>{question?.question}</p></div>
-                )}
-            </div>
-            {(difficulty === 'hard') &&
-                <div className='pop-up-compiler-block'>
-                    <div data-pym-src="https://www.jdoodle.com/a/7fRG"></div>
-                    <Helmet>
-                        <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript" />
-                    </Helmet>
+        <motion.div
+            initial={{ opacity: 0, y: -20, }} // Initial state (invisible and slightly above)
+            animate={{ opacity: 1, y: 0 }} // Animation state (visible and no movement)
+            transition={{ delay: 1, duration: 0.5 }}
+            className='pop-up-block'
+        >
+            <div className='pop-up-block-child'>
+                <div className='pop-up-question-block' >
+                    <p>{questionHeading}</p>
+                    {difficulty !== 'medium' && <div className='question-block'><p>{question?.question}</p></div>}
                 </div>
-            }
-            
-            <div className='pop-up-code-block' id = {difficulty === 'medium' ? 'pop-up-code-block-img' : undefined} >
-                <textarea onChange={changeCode} name="code" id="code" style={{ width: difficulty === 'medium' ? '18em' : (difficulty === "hard" ) ? '20em' : '40rem' }} 
-                        rows={difficulty === 'medium' ? '15' : (difficulty === "hard") ? '15' : '15'} placeholder='Paste the code here to submit.'></textarea>
-                <div className='pop-up-bottom-block'>
-                    <button onClick={pushCode}>Submit</button>
-                    <button onClick={() => {
-                        giveUp(from);
-                    }}>Give Up</button>
+                <div className='pop-up-code-block' >
+                    <div className='pop-up-code-dynamics'>
+                        {(difficulty === 'medium') && <img className='medium-question-image' src={`http://localhost:3001/${question?.question}`} alt="" />}
+                        {(difficulty === 'hard') &&
+                            <div className='pop-up-compiler-block'>
+                                <div data-pym-src="https://www.jdoodle.com/a/7fRG"></div>
+                                <Helmet>
+                                    <script src="https://www.jdoodle.com/assets/jdoodle-pym.min.js" type="text/javascript" />
+                                </Helmet>
+                            </div>
+                        }
+                        <textarea onChange={changeCode} name="code" id="code" placeholder='Paste the code here to submit.'></textarea>
+                    </div>
+                    <div className='pop-up-bottom-block'>
+                        <button onClick={pushCode}>Submit</button>
+                        <button onClick={() => {
+                            giveUp(from);
+                        }}>Give Up</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </motion.div >
     )
 }
 
