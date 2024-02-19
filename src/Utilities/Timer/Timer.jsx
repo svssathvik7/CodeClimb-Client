@@ -5,12 +5,12 @@ import "./Timer.css";
 import Countdown from 'react-countdown';
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 const Timer = () => {
-  const {setGameUp} = useContext(loginDataContextProvider);
+  const { setGameUp } = useContext(loginDataContextProvider);
   const [endTime, setEndTime] = useState(null);
   useEffect(() => {
     const getTime = async () => {
       try {
-        const response = await axios.get(process.env.REACT_APP_BACKEND_URL+"/api/user/metrics/get-contest-time");
+        const response = await axios.get(process.env.REACT_APP_BACKEND_URL + "/api/user/metrics/get-contest-time");
         if (response.data.status) {
           const time = Date.parse(response.data.startTime);
           setEndTime(time);
@@ -43,18 +43,17 @@ const Timer = () => {
     getTime();
   }, [endTime]);
   const renderer = ({ hours, minutes, seconds, completed }) => {
-    if(completed || ((hours==0)&&(minutes==0)&&(seconds==0)))
-    {
+    if (completed || ((hours === 0) && (minutes === 0) && (seconds === 0))) {
       setGameUp(true);
     }
-    else{
+    else {
       return <span>{hours}:{minutes}:{seconds}</span>;
     }
   };
   return (
     <div id='timer'>
       <div id='timer-ui'>
-        {endTime && <Countdown date={(endTime)} renderer={renderer} intervalDelay={1000}/>}
+        {endTime && <Countdown date={(endTime)} renderer={renderer} intervalDelay={1000} />}
       </div>
     </div>
   );
