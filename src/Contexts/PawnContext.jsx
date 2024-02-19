@@ -90,7 +90,7 @@ const PawnContext = ({ children }) => {
         getPawnDetails();
     }, []);
     return (
-        <pawnContextProvider.Provider value={{ pawn, setPawn, updatePawnPosition }}>
+        <pawnContextProvider.Provider value={{ pawn, setPawn, updatePawnPosition, getPawnDetails }}>
             {children}
         </pawnContextProvider.Provider>
     )
