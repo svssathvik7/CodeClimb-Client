@@ -28,6 +28,7 @@
     border-radius: 1rem;
     background-color: yellow;
     transition: all 0.3s ease;
+    font-weight: bold;
 }
 
 #hagrid-btn:hover {
@@ -42,14 +43,15 @@
 }
 
 #dice-value {
-    color: black;
+    color: white;
     width: 3dvw;
     height: 3dvw;
-    background-color: white;
+    border: thin solid #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bolder;
+    margin: 2%;
 }
 
 .roll-value-holder {
@@ -59,4 +61,34 @@
     font-weight: bolder;
     color: white;
     flex-direction: column;
+}
+.roll-history-container {
+    position: absolute;
+    top: 17%;
+    right: 1rem;
+    background-color: #b1a996;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    position: fixed;
+    z-index: 10000;
+    border: 3px solid #3F0D10;
+    max-height: 60dvh;
+    overflow-y: auto; 
+    animation: scaleAnimation 0.7s ease;
+}
+.roll-history-container h3{
+    color: #3F0D10;
+}
+#roll-history-btn{
+    border: 3px solid #3F0D10;
+    background-color: #EAD196;
+    padding: .2rem;
+    border-radius: .5rem;
+}
+#roll-history-btn:active{
+    transform: scale(0.9);
+}
+.active{
+    cursor: wait;
+    opacity: 0.2;
 }

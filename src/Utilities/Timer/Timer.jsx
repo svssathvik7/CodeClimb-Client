@@ -43,7 +43,7 @@ const Timer = () => {
     getTime();
   }, [endTime]);
   const renderer = ({ hours, minutes, seconds, completed }) => {
-    if(completed)
+    if(completed || ((hours==0)&&(minutes==0)&&(seconds==0)))
     {
       setGameUp(true);
     }
