@@ -5,12 +5,25 @@
     display: flex;
     padding: 5em 0em;
     background-color: #D7A357;
-    padding-left: 2em;
     align-items: center;
     justify-content: center;
-    padding-bottom: 10em;
+    padding-bottom: 15em;
+    flex-direction: column;
 }
-
+#user-welcome{
+    position: absolute;
+    font-weight: bold;
+    left: 0;
+    right: 0;
+    margin: 2% auto;
+    width: fit-content;
+    height: fit-content;
+    top: 0;
+    display: flex;
+    background-color: white;
+    padding: 1%;
+    border-radius: 0.5em;
+}
 .score-block {
     position: absolute;
     top: 0;
@@ -37,23 +50,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.game-over-block {
-    width: 100dvw;
-    height: 100dvh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url(../../Assets/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 9999;
-    font-size: 4em;
-    color: white;
 }
 
 .leader-board-button {

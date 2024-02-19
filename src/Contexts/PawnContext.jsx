@@ -19,7 +19,7 @@ const PawnContext = ({ children }) => {
     });
 
     const getPawnDetails = async () => {
-        const response = await axios.post('http://localhost:3001/api/details/getPawnDetails', { regNo: formData.username });
+        const response = await axios.post(process.env.REACT_APP_BACKEND_URL+"/api/details/getPawnDetails", { regNo: formData.username });
         const data = response.data;
         if (data.status === true) {
             const details = data.userDetails;
@@ -63,7 +63,7 @@ const PawnContext = ({ children }) => {
             }
         }
         if (flag === true) {
-            const response = await axios.post('http://localhost:3001/api/user/metrics/updatePosition', { diceRoll: value, regNo: formData.username, from: from });
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+"/api/user/metrics/updatePosition", { diceRoll: value, regNo: formData.username, from: from });
             const data = response.data;
             if (data.status) {
                 setPawn((prev) => {
@@ -88,7 +88,7 @@ const PawnContext = ({ children }) => {
         getPawnDetails();
     }, []);
     return (
-        <pawnContextProvider.Provider value={{ pawn, setPawn, updatePawnPosition }}>
+        <pawnContextProvider.Provider value={{ pawn, setPawn, updatePawnPosition, getPawnDetails }}>
             {children}
         </pawnContextProvider.Provider>
     )
