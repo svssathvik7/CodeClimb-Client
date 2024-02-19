@@ -16,13 +16,16 @@ export default function DiceObject() {
   const regNo = formData.username;
   const updateRollValues = async (random) => {
     try {
+      if (diceRoll !==0){
       const response = await axios.post('http://localhost:3001/api/user/metrics/update-roll-value', {
         regNo: regNo,
         diceRoll: random,
       });
       const updatedRollValues = response.data.rollValues;
       setDiceRollsHistory(updatedRollValues);
-    } catch (error) {
+    } 
+  }
+  catch (error) {
       console.error('Error updating user data:', error);
     }
   };
@@ -65,9 +68,9 @@ export default function DiceObject() {
         <div className="roll-history-container">
           <h3>Hagrid's Register</h3>
           <ul>
-            {diceRollsHistory.map((roll, index) => (
+            {diceRollsHistory.length > 0 ? diceRollsHistory.map((roll, index) => (
               <li key={index}>{roll}</li>
-            ))}
+            )) : <h4>Empty</h4>}
           </ul>
         </div>
       )}
