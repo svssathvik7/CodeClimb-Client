@@ -10,7 +10,20 @@
     justify-content: center;
     padding-bottom: 10em;
 }
-
+#user-welcome{
+    position: absolute;
+    font-weight: bold;
+    left: 0;
+    right: 0;
+    margin: 2% auto;
+    width: fit-content;
+    height: fit-content;
+    top: 0;
+    display: flex;
+    background-color: white;
+    padding: 1%;
+    border-radius: 0.5em;
+}
 .score-block {
     position: absolute;
     top: 0;

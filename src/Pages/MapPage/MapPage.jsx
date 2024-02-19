@@ -37,6 +37,7 @@ export default function MapPage() {
           setShowBoard(!showBoard);
         }}>{showBoard ? 'Close' : 'Show'} Leader Board</button>
       </div>
+      <h3 id='user-welcome'>Welcome {formData.username}🎉</h3>
       <Timer />
       <Map />
       <DiceObject />
