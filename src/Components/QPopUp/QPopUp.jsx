@@ -46,7 +46,7 @@ const QPopUp = (props) => {
             try {
                 setLoading(true);
                 const submissionId = await user + new Date().getTime();
-                const response = await axios.post(`${REACT_APP_BACKEND_URL}/api/codes/run-code`, {
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/codes/run-code`, {
                     code: code,
                     submissionId: submissionId,
                     qId: question.qId,
@@ -90,7 +90,7 @@ const QPopUp = (props) => {
     }
     const fetchQuestion = async (difficulty) => {
         try {
-            const response = await axios.post(`${REACT_APP_BACKEND_URL}/api/details/getQuestion`, { difficulty: difficulty, regNo: regNo });
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/details/getQuestion`, { difficulty: difficulty, regNo: regNo });
             const data = response.data;
             if (data.status === true) {
                 setQuestion(data.question);
