@@ -7,7 +7,7 @@ export default function LeaderBoardContext({children}) {
     const [leaderBoard,setLeaderBoard] = useState([]);
     const getLeaderBoard = async ()=>{
         try {
-            const response = (await axios.get("http://localhost:3001/api/details/leader-board")).data;
+            const response = (await axios.get(process.env.REACT_APP_BACKEND_URL+"/api/details/leader-board")).data;
             if(response.status){
                 setLeaderBoard(response.leaderBoard);
             }

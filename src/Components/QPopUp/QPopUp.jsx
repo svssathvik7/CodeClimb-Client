@@ -25,7 +25,7 @@ const QPopUp = (props) => {
             // replace hard values with qId and etc after frontend
             const submissionId = await user + new Date().getTime();
             
-            const response = await axios.post('http://localhost:3001/api/codes/run-code', {
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+"/api/codes/run-code", {
                 code: code,
                 submissionId: submissionId,
                 qId: question.qId,
@@ -65,7 +65,7 @@ const QPopUp = (props) => {
     }
     const fetchQuestion = async (difficulty) => {
         try {
-            const response = await axios.post('http://localhost:3001/api/details/getQuestion', { difficulty: difficulty, regNo: regNo });
+            const response = await axios.post(process.env.REACT_APP_BACKEND_URL+"/api/details/getQuestion", { difficulty: difficulty, regNo: regNo });
             const data = response.data;
             if (data.status === true) {
                 setQuestion(data.question);
@@ -98,7 +98,7 @@ const QPopUp = (props) => {
             <div className='pop-up-question-block' >
                 <p>{questionHeading}</p>
                 {difficulty === 'medium' ? (
-                    <div><img id='question-image' src={`http://localhost:3001/${question?.question}`} alt="" /></div>
+                    <div><img id='question-image' src={`${process.env.REACT_APP_BACKEND_URL}/${question?.question}`} alt="" /></div>
                 ) : (
                     <div className='question-block'><p>{question?.question}</p></div>
                 )}

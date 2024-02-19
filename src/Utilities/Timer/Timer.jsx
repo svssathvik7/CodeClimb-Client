@@ -10,7 +10,7 @@ const Timer = () => {
   useEffect(() => {
     const getTime = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/user/metrics/get-contest-time");
+        const response = await axios.get(process.env.REACT_APP_BACKEND_URL+"/api/user/metrics/get-contest-time");
         if (response.data.status) {
           const time = Date.parse(response.data.startTime);
           setEndTime(time);
