@@ -150,7 +150,7 @@ const QPopUp = (props) => {
                                 </Helmet>
                             </div>
                         }
-                        <textarea onChange={changeCode} name="code" id="code" placeholder='Paste the code here to submit.'></textarea>
+                        <textarea className='code-input-text-area' onChange={changeCode} name="code" id="code" placeholder='Paste the code here to submit.'></textarea>
                     </div>
                     <div className='pop-up-bottom-block'>
                         <button onClick={pushCode}>Submit</button>
