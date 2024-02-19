@@ -4,16 +4,14 @@
     flex-direction: column;
     border-radius: 10px;
     background-color: rgb(203, 187, 166);
-    z-index: 10000;
     position: fixed;
     top: 50%;
     left: 50%;
     width: 60dvw;
     height: 80dvh;
     padding: 15px;
-    z-index: 100000;
+    z-index: 10001;
 }
-
 .pop-up-block>* {
     padding: 15px 0px;
 }

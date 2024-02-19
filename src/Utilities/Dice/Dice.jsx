@@ -4,17 +4,31 @@ import Hagrid from "../../Assets/hagrid.png";
 import { diceContextProvider } from '../../Contexts/DiceContext';
 import { pawnContextProvider } from '../../Contexts/PawnContext';
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
+import axios from 'axios';
 
 export default function DiceObject() {
-  const { gameUp } = useContext(loginDataContextProvider);
+  const { gameUp,formData } = useContext(loginDataContextProvider);
   const { diceRoll, setDiceRoll } = useContext(diceContextProvider);
   const { updatePawnPosition } = useContext(pawnContextProvider);
   const [enableDice, setEnableDice] = useState(true);
   const [diceRollsHistory, setDiceRollsHistory] = useState([]);
+  const [showRollHistory, setShowRollHistory] = useState(false);
+  const regNo = formData.username;
+  const updateRollValues = async (random) => {
+    try {
+      const response = await axios.post('http://localhost:3001/api/user/metrics/update-roll-value', {
+        regNo: regNo,
+        diceRoll: random,
+      });
+      const updatedRollValues = response.data.rollValues;
+      setDiceRollsHistory(updatedRollValues);
+    } catch (error) {
+      console.error('Error updating user data:', error);
+    }
+  };
 
   const updateDiceRoll = () => {
     setEnableDice(false);
-
     setTimeout(() => {
       setEnableDice(true);
     }, 1300);
@@ -22,15 +36,15 @@ export default function DiceObject() {
     const random = Math.floor(Math.random() * 6) + 1;
     setDiceRoll(random);
     updatePawnPosition(random, 'dice-roll');
-  }
+  };
 
   useEffect(() => {
-    setDiceRollsHistory(prevHistory => {
-      const newHistory = [...prevHistory, diceRoll];
-      console.log('Dice Rolls History:', newHistory);
-      return newHistory;
-    });
+    updateRollValues(diceRoll); 
   }, [diceRoll]);
+
+  const toggleRollHistory = () => {
+    setShowRollHistory(!showRollHistory);
+  };
 
   return (
     <div id='dice-box'>
@@ -44,6 +58,19 @@ export default function DiceObject() {
         <p id='dice-value'>{diceRoll}</p>
         <p>Hagrid's Number</p>
       </div>
+      <button id="roll-history-btn" onClick={toggleRollHistory}>
+        {!showRollHistory ? "View Roll History" : "Close Roll History"}
+      </button>
+      {showRollHistory && (
+        <div className="roll-history-container">
+          <h3>Hagrid's Register</h3>
+          <ul>
+            {diceRollsHistory.map((roll, index) => (
+              <li key={index}>{roll}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

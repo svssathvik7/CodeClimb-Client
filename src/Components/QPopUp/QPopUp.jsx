@@ -15,52 +15,75 @@ const QPopUp = (props) => {
     const { user } = useContext(userContextProvider);
     const [question, setQuestion] = useState();
     const [questionHeading, setQuestionHeading] = useState();
+    const [loading,setLoading] = useState(false);
     const changeCode = (e) => {
         const { value } = e.target;
         setCode(value);
     }
     const pushCode = async (e) => {
         e.preventDefault();
-        try {
-            // replace hard values with qId and etc after frontend
-            const submissionId = await user + new Date().getTime();
-            
-            const response = await axios.post('http://localhost:3001/api/codes/run-code', {
-                code: code,
-                submissionId: submissionId,
-                qId: question.qId,
-                difficulty: difficulty
+        if (code === ``){
+            toast.info("Try Something!!", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                style: {
+                    color: 'blue', 
+                },
+                progressStyle: {
+                    backgroundColor: 'blue', 
+                },
             });
-            const data = response.data;
-            if (data.status) {
-                changePositionOnSuccess(from);
-                toast.success(`${data.message}!`, {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-            }
-            else {
-                giveUp(from);
-                toast.error("Code failed!", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                });
-            }
         }
-        catch (err) {
-            console.log("Error");
+        else{
+            try {
+                setLoading(true);
+                const submissionId = await user + new Date().getTime();
+                const response = await axios.post('http://localhost:3001/api/codes/run-code', {
+                    code: code,
+                    submissionId: submissionId,
+                    qId: question.qId,
+                    difficulty: difficulty
+                });
+                const data = response.data;
+                if (data.status) {
+                    changePositionOnSuccess(from);
+                    toast.success(`${data.message}!`, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+                }
+                else {
+                    giveUp(from);
+                    toast.error("Code failed!", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+                }
+            }
+            catch (err) {
+                console.log("Error");
+            }
+            finally {
+                setLoading(false); 
+            }
         }
     }
     const fetchQuestion = async (difficulty) => {
@@ -116,7 +139,7 @@ const QPopUp = (props) => {
                 <textarea onChange={changeCode} name="code" id="code" style={{ width: difficulty === 'medium' ? '18em' : (difficulty === "hard" ) ? '20em' : '40rem' }} 
                         rows={difficulty === 'medium' ? '15' : (difficulty === "hard") ? '15' : '15'} placeholder='Paste the code here to submit.'></textarea>
                 <div className='pop-up-bottom-block'>
-                    <button onClick={pushCode}>Submit</button>
+                    <button onClick={pushCode} disabled = {loading}>Submit</button>
                     <button onClick={() => {
                         giveUp(from);
                     }}>Give Up</button>
