@@ -7,9 +7,9 @@ import LeaderBoard from '../../Components/Leaderboard/LeaderBoard';
 import { leaderBoardContextProvider } from '../../Contexts/LeaderBoardContext';
 import { IoIosInformationCircle } from "react-icons/io";
 import Guidelines from '../../Components/Guidelines/Guidelines';
-import { pawnContextProvider } from '../../Contexts/PawnContext';
 import axios from 'axios';
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
+import { pawnContextProvider } from '../../Contexts/PawnContext';
 export default function MapPage() {
   const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
   const { pawn } = useContext(pawnContextProvider);
