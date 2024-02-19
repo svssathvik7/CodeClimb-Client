@@ -8,11 +8,23 @@ import { leaderBoardContextProvider } from '../../Contexts/LeaderBoardContext';
 import { IoIosInformationCircle } from "react-icons/io";
 import Guidelines from '../../Components/Guidelines/Guidelines';
 import { pawnContextProvider } from '../../Contexts/PawnContext';
+import axios from 'axios';
+import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 export default function MapPage() {
   const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
   const { pawn } = useContext(pawnContextProvider);
   const [guidelines, setGuideLines] = useState(false);
-
+  const { formData } = useContext(loginDataContextProvider);
+  const setScore = async () => {
+    try {
+      const response = await axios.post("http://localhost:3001/api/user/metrics/set-score-zero", { regNo: formData.username });
+      const data = response.data;
+      console.log(data);
+    }
+    catch (err) {
+      console.log(err.message);
+    }
+  }
   useEffect(() => {
 
   }, [pawn]);
@@ -36,6 +48,7 @@ export default function MapPage() {
       {pawn.gameOver && <div className='game-over-block'>
         Game Over!!!
       </div>}
+      <button onClick={setScore}>Reset Score</button>
     </div>
   )
 }

@@ -37,10 +37,9 @@ const Block = (props) => {
     }
     useEffect(() => {
         changeBlock();
-        console.log(block);
     }, [pawn]);
     return (
-        <div id={'block-id-names' + block.blockId} className={'block-head block-'+block?.isSnake?.difficulty}>
+        <div id={'block-id-names' + block.blockId} className={'block-head block-' + block?.isSnake?.difficulty}>
             {block.isSnake && <img title={block?.title} className={'snake-id-' + block.isSnake.start + " snakes-gif"} src={block.isSnake.snake} alt='snake'></img>}
             {block.isLadder && <img className={'block-id-' + block.blockId + " ladders"} src={ladder} alt='ladder'></img>}
             {block.isPawn ? <Pawn pawn={pawn} /> : <p className='block-number'>{block.blockId}</p>}

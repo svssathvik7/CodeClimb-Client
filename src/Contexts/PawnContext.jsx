@@ -65,7 +65,6 @@ const PawnContext = ({ children }) => {
         if (flag === true) {
             const response = await axios.post('http://localhost:3001/api/user/metrics/updatePosition', { diceRoll: value, regNo: formData.username, from: from });
             const data = response.data;
-            console.log(data);
             if (data.status) {
                 setPawn((prev) => {
                     return { ...prev, blockId: data.newPosition, score: data.score, gameOver: data.newPosition === 100 }
@@ -85,7 +84,6 @@ const PawnContext = ({ children }) => {
             }
         }
     }
-    console.log(pawn);
     useEffect(() => {
         getPawnDetails();
     }, []);
