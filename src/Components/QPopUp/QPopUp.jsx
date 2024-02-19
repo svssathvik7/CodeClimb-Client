@@ -12,7 +12,6 @@ const QPopUp = (props) => {
     const regNo = formData.username;
     const { giveUp, from, difficulty, changePositionOnSuccess } = props;
     const [code, setCode] = useState(``);
-    const [openCompiler, setOpenCompiler] = useState(false);
     const { user } = useContext(userContextProvider);
     const [question, setQuestion] = useState();
     const [questionHeading, setQuestionHeading] = useState();
@@ -95,16 +94,16 @@ const QPopUp = (props) => {
         fetchQuestion(difficulty);
     }, []);
     return (
-        <div className='pop-up-block' id = {openCompiler ? 'pop-up-block-hard' : undefined}>
-            {!openCompiler && <div className='pop-up-question-block' >
+        <div className='pop-up-block' id = {difficulty === 'hard' ? 'pop-up-block-hard' : 'undefined'}>
+            <div className='pop-up-question-block' >
                 <p>{questionHeading}</p>
                 {difficulty === 'medium' ? (
-                    <img id=' question-image' src={`http://localhost:3001/${question?.question}`} alt="" />
+                    <div><img id='question-image' src={`http://localhost:3001/${question?.question}`} alt="" /></div>
                 ) : (
                     <div className='question-block'><p>{question?.question}</p></div>
                 )}
-            </div>}
-            {(difficulty === 'hard' && openCompiler === true) &&
+            </div>
+            {(difficulty === 'hard') &&
                 <div className='pop-up-compiler-block'>
                     <div data-pym-src="https://www.jdoodle.com/a/7fRG"></div>
                     <Helmet>
@@ -112,14 +111,10 @@ const QPopUp = (props) => {
                     </Helmet>
                 </div>
             }
-            {difficulty === 'hard' && <div style = {{display:'flex', justifyContent:'center',alignItems:'center'}}>
-                <button id = "compiler-dynamic-button" onClick={() => {
-                    setOpenCompiler(!openCompiler);
-                }}>{openCompiler ? "Close Compiler" : "Open Compiler"}</button></div>}
             
             <div className='pop-up-code-block' id = {difficulty === 'medium' ? 'pop-up-code-block-img' : undefined} >
-                <textarea onChange={changeCode} name="code" id="code" style={{ width: difficulty === 'medium' ? '18em' : (difficulty === "hard" && openCompiler) ? '30em' : 'auto' }} 
-                        rows={difficulty === 'medium' ? '15' : (difficulty === "hard" && openCompiler) ? '20' : '3'} placeholder='Paste the code here to submit.'></textarea>
+                <textarea onChange={changeCode} name="code" id="code" style={{ width: difficulty === 'medium' ? '18em' : (difficulty === "hard" ) ? '20em' : '40rem' }} 
+                        rows={difficulty === 'medium' ? '15' : (difficulty === "hard") ? '15' : '15'} placeholder='Paste the code here to submit.'></textarea>
                 <div className='pop-up-bottom-block'>
                     <button onClick={pushCode}>Submit</button>
                     <button onClick={() => {

@@ -12,7 +12,7 @@ const snakes = {
     91: {
         snakeId: "sn2",
         start: 91,
-        end: 51,
+        end: 53,
         difficulty: "medium",
         snake: s1,
         questionId: "#"
