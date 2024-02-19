@@ -1,3 +1,22 @@
+html {
+  overflow-x: hidden;
+}
+
+
+/* SCROLL BAR STYLING */
+/* Hide the scrollbar track */
+::-webkit-scrollbar {
+  background-color: #D7A357;
+  transition: 2s ease-in-out;
+  width: 5px;
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(100, 70, 70);
+  border-radius: 10px;
+}
+
 .App {
   text-align: center;
 }
@@ -30,6 +49,10 @@
 
 button {
   cursor: pointer;
+}
+
+.Toastify__toast-container {
+  z-index: 1000000 !important;
 }
 
 @keyframes App-logo-spin {

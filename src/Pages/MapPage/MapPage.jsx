@@ -11,32 +11,55 @@ import axios from 'axios';
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 import { pawnContextProvider } from '../../Contexts/PawnContext';
 import GameOver from '../GameOver/GameOver';
+import axios from 'axios';
+import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
+import { toast } from 'react-toastify';
 export default function MapPage() {
   const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
-  const { pawn } = useContext(pawnContextProvider);
+  const { pawn, getPawnDetails } = useContext(pawnContextProvider);
   const [guidelines, setGuideLines] = useState(false);
-  const { formData,setGameUp } = useContext(loginDataContextProvider);
-  const setScore = async () => {
+  const { formData, setGameUp } = useContext(loginDataContextProvider);
+  const setScoreToZero = async () => {
     try {
-      const response = await axios.post(process.env.REACT_APP_BACKEND_URL+"/api/user/metrics/set-score-zero", { regNo: formData.username });
+      const response = await axios.post(process.env.REACT_APP_BACKEND_URL + "/api/user/metrics/set-score-zero", { regNo: formData.username });
       const data = response.data;
-      console.log(data);
+      if (data.status) {
+        getPawnDetails();
+      }
+      toast.info(data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
     catch (err) {
-      console.log(err.message);
+      toast.error(err.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   }
   useEffect(() => {
-    if(pawn.gameOver)
-    {
+    if (pawn.gameOver) {
       setGameUp(true);
     }
-    else{
+    else {
       setGameUp(false);
     }
   }, [pawn]);
   return (
-    pawn.gameOver ? <GameOver/> : <div className='map-page-container'>
+    pawn.gameOver ? <GameOver /> : <div className='map-page-container'>
       <div className='score-block'>
         <p>Score : {pawn.score}</p>
         {guidelines && <Guidelines />}
@@ -53,7 +76,10 @@ export default function MapPage() {
         setGuideLines(!guidelines);
       }} />
       {guidelines && <Guidelines />}
-      <button onClick={setScore}>Reset Score</button>
-    </div>
+      {pawn.gameOver && <div className='game-over-block'>
+        Game Over!!!
+      </div>}
+      <button onClick={setScoreToZero}>Reset Score and Position</button>
+    </div >
   )
 }

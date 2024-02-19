@@ -49,7 +49,8 @@
 }
 
 
-.block-head img {
+.block-head .snake,
+.block-head .ladder {
     position: absolute;
     z-index: 4000 !important;
     pointer-events: none;
