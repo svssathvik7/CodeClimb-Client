@@ -11,8 +11,6 @@ import axios from 'axios';
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 import { pawnContextProvider } from '../../Contexts/PawnContext';
 import GameOver from '../GameOver/GameOver';
-import axios from 'axios';
-import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 import { toast } from 'react-toastify';
 export default function MapPage() {
   const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
