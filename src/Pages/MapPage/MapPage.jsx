@@ -18,7 +18,7 @@ export default function MapPage() {
   const { formData,setGameUp } = useContext(loginDataContextProvider);
   const setScore = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/api/user/metrics/set-score-zero", { regNo: formData.username });
+      const response = await axios.post(process.env.REACT_APP_BACKEND_URL+"/api/user/metrics/set-score-zero", { regNo: formData.username });
       const data = response.data;
       console.log(data);
     }
