@@ -52,23 +52,6 @@ body {
     justify-content: center;
 }
 
-.game-over-block {
-    width: 100dvw;
-    height: 100dvh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url(../../Assets/background.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 9999;
-    font-size: 4em;
-    color: white;
-}
-
 .leader-board-button {
     position: absolute;
     top: 2rem;

@@ -10,11 +10,12 @@ import Guidelines from '../../Components/Guidelines/Guidelines';
 import axios from 'axios';
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 import { pawnContextProvider } from '../../Contexts/PawnContext';
+import GameOver from '../GameOver/GameOver';
 export default function MapPage() {
   const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
   const { pawn } = useContext(pawnContextProvider);
   const [guidelines, setGuideLines] = useState(false);
-  const { formData } = useContext(loginDataContextProvider);
+  const { formData,setGameUp } = useContext(loginDataContextProvider);
   const setScore = async () => {
     try {
       const response = await axios.post("http://localhost:3001/api/user/metrics/set-score-zero", { regNo: formData.username });
@@ -26,10 +27,16 @@ export default function MapPage() {
     }
   }
   useEffect(() => {
-
+    if(pawn.gameOver)
+    {
+      setGameUp(true);
+    }
+    else{
+      setGameUp(false);
+    }
   }, [pawn]);
   return (
-    <div className='map-page-container'>
+    pawn.gameOver ? <GameOver/> : <div className='map-page-container'>
       <div className='score-block'>
         <p>Score : {pawn.score}</p>
         {guidelines && <Guidelines />}
@@ -46,9 +53,6 @@ export default function MapPage() {
         setGuideLines(!guidelines);
       }} />
       {guidelines && <Guidelines />}
-      {pawn.gameOver && <div className='game-over-block'>
-        Game Over!!!
-      </div>}
       <button onClick={setScore}>Reset Score</button>
     </div>
   )
