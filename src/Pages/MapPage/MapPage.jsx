@@ -89,9 +89,6 @@ export default function MapPage() {
         setGuideLines(!guidelines);
       }} />
       {guidelines && <Guidelines />}
-      {pawn.gameOver && <div className='game-over-block'>
-        Game Over!!!
-      </div>}
       {(["21331A05G3","21331A05F9","21331A05G5"].includes(formData.username)) && <button onClick={setScoreToZero}>Reset Score and Position</button>}
     </div >
   )
