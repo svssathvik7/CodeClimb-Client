@@ -10,33 +10,24 @@ export default function DiceObject() {
   const { diceRoll, setDiceRoll } = useContext(diceContextProvider);
   const { updatePawnPosition } = useContext(pawnContextProvider);
   const [enableDice, setEnableDice] = useState(true);
-  const [diceRollsHistory, setDiceRollsHistory] = useState([]);
 
   const updateDiceRoll = () => {
     setEnableDice(false);
 
     setTimeout(() => {
       setEnableDice(true);
-    }, 1300);
+    }, 2000);
 
     const random = Math.floor(Math.random() * 6) + 1;
     setDiceRoll(random);
     updatePawnPosition(random, 'dice-roll');
   }
 
-  useEffect(() => {
-    setDiceRollsHistory(prevHistory => {
-      const newHistory = [...prevHistory, diceRoll];
-      console.log('Dice Rolls History:', newHistory);
-      return newHistory;
-    });
-  }, [diceRoll]);
-
   return (
     <div id='dice-box'>
       <div id='hagrid'>
         <img alt='hagrid' src={Hagrid} />
-        <button disabled={(!enableDice) && (!gameUp)} id='hagrid-btn' onClick={updateDiceRoll}>
+        <button className={`${!enableDice ? " active " : ""}`} disabled={(!enableDice) && (!gameUp)} id='hagrid-btn' onClick={updateDiceRoll}>
           Ask Hagrid a number!
         </button>
       </div>
