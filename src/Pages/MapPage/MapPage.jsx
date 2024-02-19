@@ -17,7 +17,7 @@ export default function MapPage() {
   const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
   const { pawn, getPawnDetails } = useContext(pawnContextProvider);
   const [guidelines, setGuideLines] = useState(false);
-  const { formData, setGameUp } = useContext(loginDataContextProvider);
+  const { formData, setGameUp,gameUp } = useContext(loginDataContextProvider);
   const setScoreToZero = async () => {
     try {
       socket.emit('set-score-zero', { regNo: formData.username });
@@ -72,7 +72,7 @@ export default function MapPage() {
     }
   }, [pawn]);
   return (
-    pawn.gameOver ? <GameOver /> : <div className='map-page-container'>
+    gameUp ? <GameOver /> : <div className='map-page-container'>
       <div className='score-block'>
         <p>Score : {pawn.score}</p>
         {guidelines && <Guidelines />}
