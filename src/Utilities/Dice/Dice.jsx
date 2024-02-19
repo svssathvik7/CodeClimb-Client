@@ -64,11 +64,11 @@ export default function DiceObject() {
       {showRollHistory && (
         <div className="roll-history-container">
           <h3>Hagrid's Register</h3>
-          <ul>
+          <ol>
             {diceRollsHistory.map((roll, index) => (
-              <li key={index}>{roll}</li>
+              <li style={{fontWeight:"bolder"}} key={index}>{roll}</li>
             ))}
-          </ul>
+          </ol>
         </div>
       )}
     </div>
