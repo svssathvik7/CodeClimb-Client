@@ -40,23 +40,23 @@ export const ClearThreshold = (props)=>{
         const { value } = e.target;
         setCode(value);
     }
-    const grantEligibility = ()=>{
+    const grantEligibility = async()=>{
         setShow(false);
         if(section === 's1')
         {
-            setPawn((prev)=>{
+            await setPawn((prev)=>{
                 return {...prev,section1:true};
             });
         }
         else if(section === 's2')
         {
-            setPawn((prev)=>{
+            await setPawn((prev)=>{
                 return {...prev,section2:true};
             });
         }
         else if(section === 's3')
         {
-            setPawn((prev)=>{
+            await setPawn((prev)=>{
                 return {...prev,section3:true};
             });
         }
@@ -104,7 +104,7 @@ export const ClearThreshold = (props)=>{
                 });
                 const data = response.data;
                 if (data.status) {
-                    grantEligibility();
+                    await grantEligibility();
                     toast.success(`${data.message}!`, {
                         position: "top-right",
                         autoClose: 5000,
@@ -117,6 +117,7 @@ export const ClearThreshold = (props)=>{
                     });
                 }
                 else {
+                    fetchQuestion("easy");
                     toast.error("Code failed!", {
                         position: "top-right",
                         autoClose: 5000,
@@ -164,7 +165,6 @@ export const ClearThreshold = (props)=>{
         }
     }
     useState(() => {
-        console.log("Fetch ques")
         changeQuestionHeading(difficulty);
         fetchQuestion(difficulty);
         toast.info(`You have to solve atleast 1 problem to pass ${snakeSections[section]}!`, {
@@ -318,20 +318,6 @@ const PawnContext = ({ children }) => {
                         });
                     }
                 }
-                else if(pawn.blockId + value > 40)
-                {
-                    flag = pawn.section1;
-                    if(!flag){
-                        PrintToast(snakeSections["s1"]);
-                        setShow(true);
-                        setQuesData((prev)=>{
-                            return {...prev,pawn:pawn,setPawn:setPawn,section:"s1"}
-                        });
-                    }
-                    else{
-                        setShow(false);
-                    }
-                }
                 else if(pawn.blockId + value > 61)
                 {
                     flag = pawn.section2;
@@ -340,6 +326,20 @@ const PawnContext = ({ children }) => {
                         setShow(true);
                         setQuesData((prev)=>{
                             return {...prev,pawn:pawn,setPawn:setPawn,section:"s2"}
+                        });
+                    }
+                    else{
+                        setShow(false);
+                    }
+                }
+                else if(pawn.blockId + value > 40)
+                {
+                    flag = pawn.section1;
+                    if(!flag){
+                        PrintToast(snakeSections["s1"]);
+                        setShow(true);
+                        setQuesData((prev)=>{
+                            return {...prev,pawn:pawn,setPawn:setPawn,section:"s1"}
                         });
                     }
                     else{
@@ -386,7 +386,8 @@ const PawnContext = ({ children }) => {
     }
     useEffect(() => {
         getPawnDetails();
-    }, []);
+        console.log(pawn);
+    }, [pawn]);
     return (
         <pawnContextProvider.Provider value={{ pawn, setPawn, updatePawnPosition, getPawnDetails }}>
             {children}
