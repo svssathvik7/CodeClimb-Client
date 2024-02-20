@@ -3,6 +3,18 @@ import { loginDataContextProvider } from './LoginDataContext';
 import { toast } from 'react-toastify';
 import { socketContextProvider } from './SocketContext';
 export const pawnContextProvider = createContext(null);
+const PrintToast = (placeName)=>{
+    toast.error(`Please solve atleast 1 question to cross ${placeName}!`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+    });
+}
 const PawnContext = ({ children }) => {
     const { socket } = useContext(socketContextProvider);
     const { formData } = useContext(loginDataContextProvider);
@@ -16,7 +28,12 @@ const PawnContext = ({ children }) => {
         diceRolls: 0,
         bonus: 0,
         score: 0,
-        gameOver: false
+        gameOver: false,
+        hasSeen : {
+            section1 : false,
+            section2 : false,
+            section3 : false
+        }
     });
 
     const getPawnDetails = async () => {
@@ -60,22 +77,50 @@ const PawnContext = ({ children }) => {
             var flag = true;
             if (from === 'dice-roll') {
                 if (pawn.blockId + value === 100) {
-                    setPawn((prev) => {
-                        return { ...prev, gameOver: true }
-                    });
+                    if(pawn.hasSeen.section3)
+                    {
+                        setPawn((prev) => {
+                            return { ...prev, gameOver: true }
+                        });
+                    }
+                    else{
+                        flag = pawn.hasSeen.section3;
+                        PrintToast("Godric Hallows");
+                    }
                 }
                 else if (pawn.blockId + value > 100) {
-                    toast.error("Move Not Possible", {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                    });
-                    flag = false;
+                    if(pawn.hasSeen.section3)
+                    {
+                        toast.error("Move Not Possible", {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark",
+                        });
+                        flag = false;
+                    }
+                    else{
+                        flag = false;
+                        PrintToast("Godric Hallow");
+                    }
+                }
+                else if(pawn.blockId + value > 40)
+                {
+                    flag = pawn.hasSeen.section1;
+                    if(!flag){
+                        PrintToast("Diagon Alley");
+                    }
+                }
+                else if(pawn.blockId + value > 61)
+                {
+                    flag = pawn.hasSeen.section2;
+                    if(!flag){
+                        PrintToast("Hogwarts");
+                    }
                 }
             }
             if (flag === true) {
