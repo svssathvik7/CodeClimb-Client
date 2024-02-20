@@ -26,7 +26,7 @@ const PawnContext = ({ children }) => {
             socket.on('pawnDetails', (details) => {
                 if (details !== false) {
                     setPawn((prev) => {
-                        return { ...prev, blockId: details.currPosition, diceRolls: details.totalRolls, questions: details.questions[0], score: details.score, gameOver: details.currPosition === 100 }
+                        return { ...prev, blockId: details?.currPosition, diceRolls: details?.totalRolls, questions: details?.questions[0], score: details?.score, gameOver: details?.currPosition === 100 }
                     });
                 }
                 else {
