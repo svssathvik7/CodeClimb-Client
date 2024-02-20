@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import Map from '../../Components/Map/Map'
 import "./MapPage.css";
 import Timer from '../../Utilities/Timer/Timer';

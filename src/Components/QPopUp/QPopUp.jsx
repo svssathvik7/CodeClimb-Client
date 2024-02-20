@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet';
 import './QPopUp.css';
 import { toast } from 'react-toastify';
@@ -6,7 +6,8 @@ import { userContextProvider } from '../../Contexts/UserContext';
 import { motion } from "framer-motion";
 import { loginDataContextProvider } from '../../Contexts/LoginDataContext';
 import { pawnContextProvider } from '../../Contexts/PawnContext';
-import { socketContextProvider } from '../../Contexts/SocketContext';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import axios from 'axios';
 const QPopUp = (props) => {
     const { formData } = useContext(loginDataContextProvider);
@@ -20,10 +21,12 @@ const QPopUp = (props) => {
     const [loading, setLoading] = useState(false);
     const changeCode = (e) => {
         const { value } = e.target;
+        console.log(value);
         setCode(value);
     }
     const pushCode = async (e) => {
         e.preventDefault();
+        console.log(code);
         if (code === ``) {
             toast.info("Try Something!!", {
                 position: "top-right",
@@ -55,29 +58,9 @@ const QPopUp = (props) => {
                 const data = response.data;
                 if (data.status) {
                     changePositionOnSuccess(from);
-                    toast.success(`${data.message}!`, {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                    });
                 }
                 else {
                     giveUp(from);
-                    toast.error("Code failed!", {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
-                    });
                 }
             }
             catch (err) {
@@ -87,6 +70,28 @@ const QPopUp = (props) => {
                 setLoading(false);
             }
         }
+    }
+    const submit = (title, description, event, callBackFunction) => {
+        confirmAlert({
+            title: `Confirm to ${title}`,
+            message: `Are you sure to do this. ${description}`,
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        if (title === 'give up') {
+                            callBackFunction(from);
+                        }
+                        else {
+                            callBackFunction(event);
+                        }
+                    }
+                },
+                {
+                    label: 'No',
+                }
+            ]
+        });
     }
     const fetchQuestion = async (difficulty) => {
         try {
@@ -130,8 +135,8 @@ const QPopUp = (props) => {
     }, []);
     return (
         <motion.div
-            initial={{ opacity: 0, y: -20, }} // Initial state (invisible and slightly above)
-            animate={{ opacity: 1, y: 0 }} // Animation state (visible and no movement)
+            initial={{ opacity: 0, y: -20, }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.5 }}
             className='pop-up-block'
         >
@@ -154,10 +159,10 @@ const QPopUp = (props) => {
                         <textarea className='code-input-text-area' onChange={changeCode} name="code" id="code" placeholder='Paste the code here to submit.'></textarea>
                     </div>
                     <div className='pop-up-bottom-block'>
-                        <button onClick={pushCode}>Submit</button>
-                        <button onClick={() => {
-                            giveUp(from);
-                        }}>Give Up</button>
+                        {/* <button onClick={pushCode}>Submit</button> */}
+                        <button onClick={(event) => { submit('submit', 'Your submission will be final', event, pushCode); }}>Submit</button>
+
+                        <button onClick={(event) => { submit('give up', 'You will miss the perk of solving question.', event, giveUp) }}>Give Up</button>
                     </div>
                 </div>
             </div>

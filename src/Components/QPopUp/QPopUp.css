@@ -87,6 +87,11 @@
     border-radius: 5px;
 }
 
+.react-confirm-alert-overlay {
+    z-index: 1000000 !important;
+    background: rgba(255, 255, 255, 0) !important;
+}
+
 .code-input-text-area {
     color: white;
     font-size: 2em;
