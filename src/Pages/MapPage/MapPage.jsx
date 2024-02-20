@@ -89,7 +89,7 @@ export default function MapPage() {
         setGuideLines(!guidelines);
       }} />
       {guidelines && <Guidelines />}
-      {(["21331A05G3","21331A05F9","21331A05G5"].includes(formData.username)) && <button onClick={setScoreToZero}>Reset Score and Position</button>}
+      {(["21331a05g3","21331a05f9","21331a05g5"].includes(formData.username)) && <button onClick={setScoreToZero}>Reset Score and Position</button>}
     </div >
   )
 }
