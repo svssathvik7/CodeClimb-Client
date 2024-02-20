@@ -74,7 +74,7 @@ const QPopUp = (props) => {
     const submit = (title, description, event, callBackFunction) => {
         confirmAlert({
             title: `Confirm to ${title}`,
-            message: `Are you sure to do this. ${description}`,
+            message: `${description}`,
             buttons: [
                 {
                     label: 'Yes',
@@ -159,10 +159,9 @@ const QPopUp = (props) => {
                         <textarea className='code-input-text-area' onChange={changeCode} name="code" id="code" placeholder='Paste the code here to submit.'></textarea>
                     </div>
                     <div className='pop-up-bottom-block'>
-                        {/* <button onClick={pushCode}>Submit</button> */}
-                        <button onClick={(event) => { submit('submit', 'Your submission will be final', event, pushCode); }}>Submit</button>
+                        <button onClick={(event) => { submit('submit', 'You can only submit once be sure.', event, pushCode); }}>Submit</button>
 
-                        <button onClick={(event) => { submit('give up', 'You will miss the perk of solving question.', event, giveUp) }}>Give Up</button>
+                        <button onClick={(event) => { submit('give up', 'If you give up, the snake will bite you.', event, giveUp) }}>Give Up</button>
                     </div>
                 </div>
             </div>
