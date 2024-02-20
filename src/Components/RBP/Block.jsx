@@ -22,9 +22,17 @@ const Block = (props) => {
             return { ...prev, isPawn: blockId === pawn.blockId, title: snakes[blockId]?.title }
         });
     }
-    const changePositionOnSuccess = (from) => {
-        setBlock((prev) => {
-            return { ...prev, isPawn: false }
+    const changePositionOnSuccess = async (from) => {
+        var section;
+        if(from === "snake")
+        {
+            section = await (block.isSnake.start >= 62 && block.isSnake.start <= 100) ? "section3" : (block.isSnake.start > 40 && block.isSnake.start <= 63) ? "section2" : "section1";
+        }
+        else{
+            section = await (block.isLadder.start >= 62 && block.isLadder.start <= 100) ? "section3" : (block.isLadder.start > 40 && block.isLadder.start <= 63) ? "section2" : "section1";
+        }
+        await setBlock((prev) => {
+            return { ...prev, isPawn: false, [section] : true };
         });
         const value = from === 'snake' ? block.isSnake.start + 1 : block.isLadder.end;
         const message = from === 'snake' ? `Hurray! You successfully avoided the snake bite at ${block.isSnake.start}. You've been moved to the next block` : `Congratulations! You've successfully solved the question for the ladder ${block.isLadder.start}. You've been moved to ${block.isLadder.end}`
