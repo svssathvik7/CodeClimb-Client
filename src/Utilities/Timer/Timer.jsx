@@ -17,7 +17,7 @@ const Timer = () => {
         } else {
           toast.error("Failed to fetch contest start time from the server", {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 7000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -30,7 +30,7 @@ const Timer = () => {
         console.error("Error fetching contest start time:", error);
         toast.error("Failed to fetch contest start time from the server", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 7000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

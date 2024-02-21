@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import Map from '../../Components/Map/Map'
 import "./MapPage.css";
 import Timer from '../../Utilities/Timer/Timer';
@@ -27,7 +27,7 @@ export default function MapPage() {
           getPawnDetails();
           toast.info("Reset successfully", {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 7000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -39,7 +39,7 @@ export default function MapPage() {
         else {
           toast.error('Error occured!', {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 7000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -53,7 +53,7 @@ export default function MapPage() {
     catch (err) {
       toast.error(err.message, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 7000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

@@ -26,7 +26,7 @@ export default function Login() {
                 else {
                     toast.error("Login failed!", {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 7000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -39,7 +39,7 @@ export default function Login() {
         } catch (error) {
             toast.error("Login failed!", {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 7000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
