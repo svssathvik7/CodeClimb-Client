@@ -32,7 +32,7 @@ const PawnContext = ({ children }) => {
                 else {
                     toast.error("Error occured while fetching pawn details.", {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 7000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -45,7 +45,7 @@ const PawnContext = ({ children }) => {
         } catch (error) {
             toast.error("Error Occured!", {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 7000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -67,7 +67,7 @@ const PawnContext = ({ children }) => {
                 else if (pawn.blockId + value > 100) {
                     toast.error("Move Not Possible", {
                         position: "top-right",
-                        autoClose: 5000,
+                        autoClose: 7000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -90,7 +90,7 @@ const PawnContext = ({ children }) => {
                     else {
                         toast.error("Error occured while updating pawn position!", {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 7000,
                             hideProgressBar: false,
                             closeOnClick: true,
                             pauseOnHover: true,
@@ -105,7 +105,7 @@ const PawnContext = ({ children }) => {
         catch (err) {
             toast.error("Error occured while updating pawn position!", {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 7000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,

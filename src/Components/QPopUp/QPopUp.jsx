@@ -30,7 +30,7 @@ const QPopUp = (props) => {
         if (code === ``) {
             toast.info("Try Something!!", {
                 position: "top-right",
-                autoClose: 2000,
+                autoClose: 7000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -124,7 +124,7 @@ const QPopUp = (props) => {
         fetchQuestion(difficulty);
         toast.info(`You are at position : ${currPosition} and there is a ${from} over here`, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 7000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

@@ -30,7 +30,7 @@ const Block = (props) => {
         const message = from === 'snake' ? `Hurray! You successfully avoided the snake bite at ${block.isSnake.start}. You've been moved to the next block` : `Congratulations! You've successfully solved the question for the ladder ${block.isLadder.start}. You've been moved to ${block.isLadder.end}`
         toast.success(message, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 7000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -48,7 +48,7 @@ const Block = (props) => {
         const message = from === 'snake' ? `Oh no! The snake at position ${block.isSnake.start} has bitten you! You've been moved to ${block.isSnake.end}` : `Oops! You didn't solve the question for the ladder ${block.isLadder.start}. You've been moved to the next block.`;
         toast.info(message, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 7000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,

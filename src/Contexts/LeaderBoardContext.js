@@ -23,7 +23,7 @@ export default function LeaderBoardContext({ children }) {
         } catch (error) {
             toast.error("Failed retreiving data!", {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 7000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
