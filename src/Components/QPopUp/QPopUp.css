@@ -120,3 +120,8 @@
     justify-content: space-evenly;
     align-items: center;
 }
+
+.medium-question-image {
+    width: 52dvw; 
+    height: 52dvh; 
+  }

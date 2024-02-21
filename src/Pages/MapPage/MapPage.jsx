@@ -18,6 +18,7 @@ export default function MapPage() {
   const { pawn, getPawnDetails } = useContext(pawnContextProvider);
   const [guidelines, setGuideLines] = useState(false);
   const { formData, setGameUp, gameUp } = useContext(loginDataContextProvider);
+  const [celebration, setCelebration] = useState(false);
   const setScoreToZero = async () => {
     try {
       socket.emit('set-score-zero', { regNo: formData.username });
@@ -63,16 +64,34 @@ export default function MapPage() {
       });
     }
   }
-  useEffect(() => {
-    if (pawn.gameOver) {
-      setGameUp(true);
+  useEffect(() =>{
+    let timeOutId;
+    if(pawn.gameOver){
+      setCelebration(true);
+      toast.success("Congratulations! You have completed the game!", {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      timeOutId = setTimeout(() => {
+        setGameUp(true);
+        setCelebration(false);
+      }, 5000)
     }
-    else {
+    else{
       setGameUp(false);
     }
-  }, [pawn]);
+    return () => clearTimeout(timeOutId);
+  },[pawn]);
+
   return (
-    gameUp ? <GameOver /> : <div className='map-page-container'>
+    gameUp ? <GameOver /> : gameUp ? <GameOver /> : <div className={'map-page-container'} id = {celebration ? 'celebration' : ''}>
+      
       <div className='score-block'>
         <p>Score : {pawn.score}</p>
         {guidelines && <Guidelines />}
@@ -89,7 +108,7 @@ export default function MapPage() {
         setGuideLines(!guidelines);
       }} />
       {guidelines && <Guidelines />}
-      {(["21331a05g3","21331a05f9","21331a05g5"].includes(formData.username)) && <button onClick={setScoreToZero}>Reset Score and Position</button>}
+      {(["21331A05G3","21331A05F9","21331A05G5"].includes(formData.username)) && <button onClick={setScoreToZero}>Reset Score and Position</button>}
     </div >
   )
 }
