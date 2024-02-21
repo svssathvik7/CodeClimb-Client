@@ -11,16 +11,14 @@ import SocketContext from './Contexts/SocketContext';
 function App() {
   return (
     <div>
-      <SocketContext>
-        <LoginDataContext>
-          <PawnContext>
-            <Routes>
-              <Route exact path="/" Component={Login} />
-              <Route exact path='/map' element={<DiceContext><MapPage /></DiceContext>} />
-            </Routes>
-          </PawnContext>
-        </LoginDataContext>
-      </SocketContext>
+      <LoginDataContext>
+        <PawnContext>
+          <Routes>
+            <Route exact path="/" Component={Login} />
+            <Route exact path='/map' element={<DiceContext><MapPage /></DiceContext>} />
+          </Routes>
+        </PawnContext>
+      </LoginDataContext>
       <ToastContainer
         position="top-right"
         autoClose={5000}
