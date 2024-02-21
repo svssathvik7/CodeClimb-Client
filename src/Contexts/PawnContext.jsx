@@ -9,11 +9,11 @@ import "../Components/QPopUp/QPopUp.css"
 import axios from 'axios';
 export const pawnContextProvider = createContext(null);
 const snakeSections = {
-    s3 : "Hodrics Hallow",
-    s2 : "Diagon Alley",
-    s1 : "Hogwarts"
+    s3: "Hodrics Hallow",
+    s2: "Diagon Alley",
+    s1: "Hogwarts"
 }
-const PrintToast = (placeName)=>{
+const PrintToast = (placeName) => {
     toast.error(`Please solve atleast 1 question to cross ${placeName}!`, {
         position: "top-right",
         autoClose: 5000,
@@ -25,9 +25,9 @@ const PrintToast = (placeName)=>{
         theme: "dark",
     });
 }
-export const ClearThreshold = (props)=>{
-    const {pawn,setPawn,section,setShow} = props;
-    console.log(section,"For threshold")
+export const ClearThreshold = (props) => {
+    const { pawn, setPawn, section, setShow } = props;
+    console.log(section, "For threshold")
     const { formData } = useContext(loginDataContextProvider);
     const regNo = formData.username;
     const difficulty = "easy";
@@ -40,24 +40,21 @@ export const ClearThreshold = (props)=>{
         const { value } = e.target;
         setCode(value);
     }
-    const grantEligibility = async()=>{
+    const grantEligibility = async () => {
         setShow(false);
-        if(section === 's1')
-        {
-            await setPawn((prev)=>{
-                return {...prev,section1:true};
+        if (section === 's1') {
+            await setPawn((prev) => {
+                return { ...prev, section1: true };
             });
         }
-        else if(section === 's2')
-        {
-            await setPawn((prev)=>{
-                return {...prev,section2:true};
+        else if (section === 's2') {
+            await setPawn((prev) => {
+                return { ...prev, section2: true };
             });
         }
-        else if(section === 's3')
-        {
-            await setPawn((prev)=>{
-                return {...prev,section3:true};
+        else if (section === 's3') {
+            await setPawn((prev) => {
+                return { ...prev, section3: true };
             });
         }
         toast.success(`Hurray! You are eligible to cross ${snakeSections[section]} successfully!`, {
@@ -70,7 +67,7 @@ export const ClearThreshold = (props)=>{
             progress: undefined,
             theme: "dark",
         });
-        console.log("Pawn status after success : ",pawn);
+        console.log("Pawn status after success : ", pawn);
     }
     const pushCode = async (e) => {
         e.preventDefault();
@@ -192,7 +189,7 @@ export const ClearThreshold = (props)=>{
                 </div>
                 <div className='pop-up-code-block' >
                     <div className='pop-up-code-dynamics'>
-                        {(difficulty === 'medium') && <img className='medium-question-image' src={process.env.REACT_APP_BACKEND_URL+`/${question?.question}`} alt="" />}
+                        {(difficulty === 'medium') && <img className='medium-question-image' src={process.env.REACT_APP_BACKEND_URL + `/${question?.question}`} alt="" />}
                         {(difficulty === 'hard') &&
                             <div className='pop-up-compiler-block'>
                                 <div data-pym-src="https://www.jdoodle.com/a/7fRG"></div>
@@ -213,7 +210,7 @@ export const ClearThreshold = (props)=>{
 }
 const PawnContext = ({ children }) => {
     const { socket } = useContext(socketContextProvider);
-    const [show,setShow] = useState(false);
+    const [show, setShow] = useState(false);
     const { formData } = useContext(loginDataContextProvider);
     const [pawn, setPawn] = useState({
         blockId: null,
@@ -226,14 +223,14 @@ const PawnContext = ({ children }) => {
         bonus: 0,
         score: 0,
         gameOver: false,
-        section1 : false,
-        section2 : false,
-        section3 : false
+        section1: false,
+        section2: false,
+        section3: false
     });
-    const [quesData,setQuesData] = useState({
-        pawn : pawn,
-        setPawn : setPawn,
-        section : null
+    const [quesData, setQuesData] = useState({
+        pawn: pawn,
+        setPawn: setPawn,
+        section: null
     });
 
     const getPawnDetails = async () => {
@@ -277,25 +274,23 @@ const PawnContext = ({ children }) => {
             var flag = true;
             if (from === 'dice-roll') {
                 if (pawn.blockId + value === 100) {
-                    if(pawn.section3)
-                    {
+                    if (pawn.section3) {
                         setShow(false);
                         setPawn((prev) => {
                             return { ...prev, gameOver: true }
                         });
                     }
-                    else{
+                    else {
                         flag = pawn.section3;
                         PrintToast(snakeSections["s3"]);
                         setShow(true);
-                        setQuesData((prev)=>{
-                            return {...prev,pawn:pawn,setPawn:setPawn,section:"s3"}
+                        setQuesData((prev) => {
+                            return { ...prev, pawn: pawn, setPawn: setPawn, section: "s3" }
                         });
                     }
                 }
                 else if (pawn.blockId + value > 100) {
-                    if(pawn.section3)
-                    {
+                    if (pawn.section3) {
                         toast.error("Move Not Possible", {
                             position: "top-right",
                             autoClose: 5000,
@@ -309,40 +304,38 @@ const PawnContext = ({ children }) => {
                         setShow(false);
                         flag = false;
                     }
-                    else{
+                    else {
                         flag = false;
                         PrintToast(snakeSections["s3"]);
                         setShow(true);
-                        setQuesData((prev)=>{
-                            return {...prev,pawn:pawn,setPawn:setPawn,section:"s3"}
+                        setQuesData((prev) => {
+                            return { ...prev, pawn: pawn, setPawn: setPawn, section: "s3" }
                         });
                     }
                 }
-                else if(pawn.blockId + value > 61)
-                {
+                else if (pawn.blockId + value > 61) {
                     flag = pawn.section2;
-                    if(!flag){
+                    if (!flag) {
                         PrintToast(snakeSections["s2"]);
                         setShow(true);
-                        setQuesData((prev)=>{
-                            return {...prev,pawn:pawn,setPawn:setPawn,section:"s2"}
+                        setQuesData((prev) => {
+                            return { ...prev, pawn: pawn, setPawn: setPawn, section: "s2" }
                         });
                     }
-                    else{
+                    else {
                         setShow(false);
                     }
                 }
-                else if(pawn.blockId + value > 40)
-                {
+                else if (pawn.blockId + value > 40) {
                     flag = pawn.section1;
-                    if(!flag){
+                    if (!flag) {
                         PrintToast(snakeSections["s1"]);
                         setShow(true);
-                        setQuesData((prev)=>{
-                            return {...prev,pawn:pawn,setPawn:setPawn,section:"s1"}
+                        setQuesData((prev) => {
+                            return { ...prev, pawn: pawn, setPawn: setPawn, section: "s1" }
                         });
                     }
-                    else{
+                    else {
                         setShow(false);
                     }
                 }
@@ -387,11 +380,11 @@ const PawnContext = ({ children }) => {
     useEffect(() => {
         getPawnDetails();
         console.log(pawn);
-    }, [pawn]);
+    }, []);
     return (
         <pawnContextProvider.Provider value={{ pawn, setPawn, updatePawnPosition, getPawnDetails }}>
             {children}
-            {show && <ClearThreshold pawn={quesData.pawn} setPawn={quesData.setPawn} section={quesData.section} setShow={setShow}/>}
+            {show && <ClearThreshold pawn={quesData.pawn} setPawn={quesData.setPawn} section={quesData.section} setShow={setShow} />}
         </pawnContextProvider.Provider>
     )
 }
