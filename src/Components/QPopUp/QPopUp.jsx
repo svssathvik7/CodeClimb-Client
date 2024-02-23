@@ -122,7 +122,7 @@ const QPopUp = (props) => {
     useState(() => {
         changeQuestionHeading(difficulty);
         fetchQuestion(difficulty);
-        toast.info(`You are at position : ${currPosition} and there is a ${from} over here`, {
+        toast.info(`You are at position : ${currPosition} and there is a ${from} over here ${(from === 'snake') ? " and will end up at position" + props.endPos : ""}`, {
             position: "top-right",
             autoClose: 7000,
             hideProgressBar: false,

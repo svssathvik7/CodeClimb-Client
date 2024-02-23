@@ -74,8 +74,8 @@ const Block = (props) => {
             {block.isSnake && <img title={block?.title} className={'snake snake-id-' + block.isSnake.start + " snakes-gif"} src={block.isSnake.snake} alt='snake'></img>}
             {block.isLadder && <img className={'ladder block-id-' + block.blockId + " ladders"} src={ladder} alt='ladder'></img>}
             {block.isPawn ? <Pawn pawn={pawn} /> : <p className='block-number'>{block.blockId}</p>}
-            {(block.isPawn && block.isSnake) ? <QPopUp pawn={pawn} currPosition={block.blockId} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isSnake.difficulty} from='snake' giveUp={giveUp} /> : null}
-            {(block.isPawn && block.isLadder) ? <QPopUp pawn={pawn} currPosition={block.blockId} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isLadder.difficulty} from='ladder' giveUp={giveUp} /> : null}
+            {(block.isPawn && block.isSnake) ? <QPopUp pawn={pawn} currPosition={block.blockId} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} endPos={block.isSnake ? block.isSnake.end : ""} difficulty={block.isSnake.difficulty} from='snake' giveUp={giveUp} /> : null}
+            {(block.isPawn && block.isLadder) ? <QPopUp endPos={block.isSnake ? block.isSnake.end : ""} pawn={pawn} currPosition={block.blockId} changePositionOnSuccess={changePositionOnSuccess} setPawn={setPawn} difficulty={block.isLadder.difficulty} from='ladder' giveUp={giveUp} /> : null}
         </div>
     )
 }

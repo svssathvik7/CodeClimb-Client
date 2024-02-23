@@ -93,7 +93,7 @@ export default function MapPage() {
     gameUp ? <GameOver /> : gameUp ? <GameOver /> : <div className={'map-page-container'} id = {celebration ? 'celebration' : ''}>
       
       <div className='score-block'>
-        <p>Score : {pawn.score}</p>
+        <p>Score : {pawn?.score}</p>
         {guidelines && <Guidelines />}
         <button className='leader-board-button' onClick={() => {
           setShowBoard(!showBoard);
