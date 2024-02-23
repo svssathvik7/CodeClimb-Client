@@ -273,7 +273,12 @@ const PawnContext = ({ children }) => {
         try {
             var flag = true;
             if (from === 'dice-roll') {
-                if (pawn.blockId + value === 100) {
+                if(pawn.blockId + value < 10){
+                    setPawn((prev)=>{
+                        return {...prev,section1:false,section2:false,section3:false,gameOver:false};
+                    });
+                }
+                else if(pawn.blockId + value === 100) {
                     if (pawn.section3) {
                         setShow(false);
                         setPawn((prev) => {
