@@ -8,6 +8,7 @@ import DiceContext from './Contexts/DiceContext';
 import LoginDataContext from './Contexts/LoginDataContext';
 import PawnContext from './Contexts/PawnContext';
 import SocketContext from './Contexts/SocketContext';
+import Register from './Pages/Login/Register';
 function App() {
   return (
     <div>
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route exact path="/" Component={Login} />
             <Route exact path='/map' element={<DiceContext><MapPage /></DiceContext>} />
+            <Route exact path='/register' element={<Register />} />
           </Routes>
         </PawnContext>
       </LoginDataContext>
