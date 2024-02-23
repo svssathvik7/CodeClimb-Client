@@ -64,9 +64,9 @@ export default function MapPage() {
       });
     }
   }
-  useEffect(() =>{
+  useEffect(() => {
     let timeOutId;
-    if(pawn.gameOver){
+    if (pawn.gameOver) {
       setCelebration(true);
       toast.success("Congratulations! You have completed the game!", {
         position: "top-right",
@@ -83,15 +83,15 @@ export default function MapPage() {
         setCelebration(false);
       }, 5000)
     }
-    else{
+    else {
       setGameUp(false);
     }
     return () => clearTimeout(timeOutId);
-  },[pawn]);
+  }, [pawn]);
 
   return (
-    gameUp ? <GameOver /> : gameUp ? <GameOver /> : <div className={'map-page-container'} id = {celebration ? 'celebration' : ''}>
-      
+    gameUp ? <GameOver /> : gameUp ? <GameOver /> : <div className={'map-page-container'} id={celebration ? 'celebration' : ''}>
+
       <div className='score-block'>
         <p>Score : {pawn?.score}</p>
         {guidelines && <Guidelines />}
@@ -108,7 +108,7 @@ export default function MapPage() {
         setGuideLines(!guidelines);
       }} />
       {guidelines && <Guidelines />}
-      {(["21331A05G3","21331A05F9","21331A05G5"].includes(formData.username)) && <button onClick={setScoreToZero}>Reset Score and Position</button>}
+      {(["AdminAzeem", "AdminSathish", "AdminSathvik"].includes(formData.username)) && <button onClick={setScoreToZero}>Reset Score and Position</button>}
     </div >
   )
 }

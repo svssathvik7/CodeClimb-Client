@@ -159,9 +159,9 @@ const QPopUp = (props) => {
                         <textarea className='code-input-text-area' onChange={changeCode} name="code" id="code" placeholder='Paste the code here to submit.'></textarea>
                     </div>
                     <div className='pop-up-bottom-block'>
-                        <button onClick={(event) => { submit('submit', 'You can only submit once be sure.', event, pushCode); }} disabled = {loading} style={{ opacity: loading ? 0.5 : 1 }}>Submit</button>
+                        <button onClick={(event) => { submit('submit', 'You can only submit once be sure.', event, pushCode); }} disabled={loading} style={{ opacity: loading ? 0.5 : 1 }}>Submit</button>
 
-                        <button onClick={(event) => { submit('give up', 'If you give up, the snake will bite you.', event, giveUp) }}>Give Up</button>
+                        <button onClick={(event) => { submit('give up', "If you give up, you won't be able to enjoy the benefits of solving this question.", event, giveUp) }}>Give Up</button>
                     </div>
                 </div>
             </div>
