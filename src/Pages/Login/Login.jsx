@@ -22,7 +22,7 @@ export default function Login() {
                 if (data !== false) {
                     const regNo = formData?.username;
                     localStorage.setItem('user', regNo);
-                    navigate('/map');
+                    navigate('/landing-page');
                 }
                 else {
                     toast.error("Login failed!", {
