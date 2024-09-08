@@ -7,19 +7,26 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 export default function LandingPage() {
     const [guidelines, setGuideLines] = useState(false);
-    const { formData, setGameUp, gameUp } = useContext(loginDataContextProvider);
+    const { formData, gameUp } = useContext(loginDataContextProvider);
 
     const navigate = useNavigate();
 
     useEffect(() => {
+
+        if (gameUp === true) {
+            navigate('/map');
+        }
+
         if (localStorage.getItem('user') === null) {
             navigate("/");
         }
     }, []);
 
     const startGame = async () => {
+        //just have to make a api hit to start the game and it should contain admin id in it.
 
-        //just have to make a api hit to start the game and it should contain admin id in it.        
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user/metrics/set-contest-time`, { regNo: formData.username });
+        console.log(response.data);
     }
 
     return (
