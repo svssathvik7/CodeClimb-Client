@@ -43,9 +43,22 @@ export default function LandingPage() {
       />
       {guidelines && <Guidelines />}
 
-      {["AdminAzeem", "AdminSathish", "AdminSathvik"].includes(
-        formData.username
-      ) && <button onClick={startGame}>Start A New Game</button>}
+      {[
+        "AdminAzeem",
+        "AdminSathish",
+        "AdminSathvik",
+        "21331a05g3",
+        "21331a05g5",
+        "21331A05G3",
+        "21331A05G5",
+      ].includes(formData.username) && (
+        <button
+          className="bg-white absolute top-0 right-0 m-2 p-2 rounded-2xl cursor-pointer"
+          onClick={startGame}
+        >
+          Start A New Game
+        </button>
+      )}
 
       <div className="about-child">
         <div className="about-description">
