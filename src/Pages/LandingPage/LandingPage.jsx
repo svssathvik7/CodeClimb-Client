@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import "./LandingPage.css";
-import { IoIosInformationCircle } from "react-icons/io";
+import { IoIosInformationCircle, IoMdArrowDropright } from "react-icons/io";
 import Guidelines from "../../Components/Guidelines/Guidelines";
 import { loginDataContextProvider } from "../../Contexts/LoginDataContext";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +32,11 @@ export default function LandingPage() {
   };
 
   return (
-    <div className={"map-page-container"}>
+    <div
+      className={
+        "map-page-container h-screen overflow-hidden flex flex-col items-center justify-start"
+      }
+    >
       <div className="score-block">{guidelines && <Guidelines />}</div>
       <h3 id="user-welcome">Welcome {formData.username}🎉</h3>
       <IoIosInformationCircle
@@ -63,7 +67,7 @@ export default function LandingPage() {
       <div className="about-child">
         <div className="about-description">
           <h2 className="font-bold text-3xl">About Code and Climb</h2>
-          <p>
+          <p className="inline">
             Code and Climb transforms traditional gaming into an interactive
             learning experience by embedding coding challenges within the
             classic snake and ladder game. Designed to make coding competitions
@@ -73,6 +77,12 @@ export default function LandingPage() {
             simultaneously, Code and Climb is redefining the way students
             practice and compete in coding. 🚀
           </p>
+          <button
+            onClick={() => navigate("/map")}
+            className="w-fit flex items-center justify-start bg-white rounded-2xl px-2 my-2"
+          >
+            Go to Map <IoMdArrowDropright />
+          </button>
         </div>
 
         <img
