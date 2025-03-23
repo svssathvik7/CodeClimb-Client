@@ -12,6 +12,7 @@ import { pawnContextProvider } from '../../Contexts/PawnContext';
 import GameOver from '../GameOver/GameOver';
 import { toast } from 'react-toastify';
 import { socketContextProvider } from '../../Contexts/SocketContext';
+import { admins } from '../../Constants/AdminConstants';
 export default function MapPage() {
   const { socket } = useContext(socketContextProvider);
   const { showBoard, setShowBoard } = useContext(leaderBoardContextProvider);
@@ -108,7 +109,7 @@ export default function MapPage() {
         setGuideLines(!guidelines);
       }} />
       {guidelines && <Guidelines />}
-      {(["AdminAzeem", "AdminSathish", "AdminSathvik"].includes(formData.username)) && <button onClick={setScoreToZero}>Reset Score and Position</button>}
+      {(admins.includes(formData.username)) && <button onClick={setScoreToZero}>Reset Score and Position</button>}
     </div >
   )
 }

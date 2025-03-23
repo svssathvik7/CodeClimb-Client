@@ -5,6 +5,7 @@ import Guidelines from "../../Components/Guidelines/Guidelines";
 import { loginDataContextProvider } from "../../Contexts/LoginDataContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { admins } from "../../Constants/AdminConstants";
 export default function LandingPage() {
   const [guidelines, setGuideLines] = useState(false);
   const { formData, gameUp } = useContext(loginDataContextProvider);
@@ -43,15 +44,7 @@ export default function LandingPage() {
       />
       {guidelines && <Guidelines />}
 
-      {[
-        "AdminAzeem",
-        "AdminSathish",
-        "AdminSathvik",
-        "21331a05g3",
-        "21331a05g5",
-        "21331A05G3",
-        "21331A05G5",
-      ].includes(formData.username) && (
+      {admins.includes(formData.username) && (
         <button
           className="bg-white absolute top-0 right-0 m-2 p-2 rounded-2xl cursor-pointer"
           onClick={startGame}
