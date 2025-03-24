@@ -17,7 +17,7 @@ export default function DiceObject() {
   const updateRollValues = async (random) => {
     try {
       if (diceRoll !==0){
-      const response = await axios.post('http://localhost:3001/api/user/metrics/update-roll-value', {
+      const response = await axios.post('http://localhost:3003/api/user/metrics/update-roll-value', {
         regNo: regNo,
         diceRoll: random,
       });

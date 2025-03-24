@@ -147,7 +147,7 @@ const QPopUp = (props) => {
                 </div>
                 <div className='pop-up-code-block' >
                     <div className='pop-up-code-dynamics'>
-                        {(difficulty === 'medium') && <img className='medium-question-image' src={`http://localhost:3001/${question?.question}`} alt="" />}
+                        {(difficulty === 'medium') && <img className='medium-question-image' src={`http://localhost:3003/${question?.question}`} alt="" />}
                         {(difficulty === 'hard') &&
                             <div className='pop-up-compiler-block'>
                                 <div data-pym-src="https://www.jdoodle.com/a/7fRG"></div>
