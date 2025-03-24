@@ -6,6 +6,8 @@ import { loginDataContextProvider } from "../../Contexts/LoginDataContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { admins } from "../../Constants/AdminConstants";
+import { toast } from "react-toastify";
+
 export default function LandingPage() {
   const [guidelines, setGuideLines] = useState(false);
   const { formData, gameUp } = useContext(loginDataContextProvider);
@@ -23,13 +25,36 @@ export default function LandingPage() {
   }, []);
 
   const startGame = async () => {
-    //just have to make a api hit to start the game and it should contain admin id in it.
-
-    const response = await axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/user/metrics/set-contest-time`,
-      { regNo: formData.username }
-    );
-    console.log(response.data);
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/user/metrics/set-contest-time`,
+        { regNo: formData.username }
+      );
+      if (response.data) {
+        toast.success("Game started successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      toast.error("Failed to start the game. Please try again.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      console.error("Error starting game:", error);
+    }
   };
 
   return (
